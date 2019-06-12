@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'MuShare-Login-Swift-SDK'
-  s.version          = '0.1.0'
+  s.name             = 'MuShareLogin'
+  s.version          = '0.1'
   s.summary          = 'A short description of MuShare-Login-Swift-SDK.'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MuShare-Login-Swift-SDK/Classes/**/*'
+  s.source_files = 'MuShareLogin/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MuShare-Login-Swift-SDK' => ['MuShare-Login-Swift-SDK/Assets/*.png']

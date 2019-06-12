@@ -1,5 +1,5 @@
 import XCTest
-import MuShare-Login-Swift-SDK
+import MuShareLogin
 
 class Tests: XCTestCase {
     

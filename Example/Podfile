@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'MuShare-Login-Swift-SDK_Example' do
-  pod 'MuShare-Login-Swift-SDK', :path => '../'
+  pod 'MuShareLogin', :path => '../'
 
   target 'MuShare-Login-Swift-SDK_Tests' do
     inherit! :search_paths

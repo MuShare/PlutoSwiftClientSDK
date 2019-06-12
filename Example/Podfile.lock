@@ -1,0 +1,16 @@
+PODS:
+  - MuShareLogin (0.1.0)
+
+DEPENDENCIES:
+  - MuShareLogin (from `../`)
+
+EXTERNAL SOURCES:
+  MuShareLogin:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MuShareLogin: d71a5a2a58356394ad2536e507589d23e1cb664e
+
+PODFILE CHECKSUM: 0b14dce14e8c17d9e8c14c89a2079549ce10ba7a
+
+COCOAPODS: 1.7.1
