@@ -32,11 +32,6 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'MuShareLogin/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'MuShare-Login-Swift-SDK' => ['MuShare-Login-Swift-SDK/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'Alamofire', '~> 4'
+  s.dependency 'SwiftyJSON', '~> 5'
 end
