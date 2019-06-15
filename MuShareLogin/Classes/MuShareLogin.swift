@@ -1,10 +1,6 @@
 
 import Alamofire
 
-public enum MuShareLoginError: Error {
-    
-}
-
 final public class MuShareLogin {
     
     public static let shared = MuShareLogin()
@@ -48,7 +44,7 @@ final public class MuShareLogin {
             if response.statusOK() {
                 success()
             } else {
-                
+                error?(response.errorCode())
             }
         }
     }

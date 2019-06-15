@@ -27,8 +27,11 @@ class RegisterByEmailViewController: UIViewController {
         else {
             return
         }
-        MuShareLogin.shared.registerByEmail(address: address, password: password, name: name, success: {
-            
+        MuShareLogin.shared.registerByEmail(address: address, password: password, name: name, success: { [weak self] in
+            self?.showAlert(title: "Register", content: "Register success for " + address)
+            self?.navigationController?.popViewController(animated: true)
+        }, error: { [weak self] error in
+            self?.showAlert(title: "Error", content: error.localizedDescription)
         })
     }
     

@@ -26,15 +26,17 @@ struct MuShareResponse {
         return JSON(result)
     }
     
-    func errorCode() -> ErrorCode {
-        guard !data.isEmpty, let code = data["errorCode"] as? Int else {
+    func errorCode() -> MuShareLoginError {
+        guard !data.isEmpty, let code = data["error"] as? Int else {
             return .badRequest
         }
-        return ErrorCode(rawValue: code) ?? .badRequest
+        return MuShareLoginError(rawValue: code) ?? .badRequest
     }
     
 }
 
-enum ErrorCode: Int {
+public enum MuShareLoginError: Int, Error {
     case badRequest = -99999
+    case sdkSecret = 2001
+    case emailExist = 2011
 }

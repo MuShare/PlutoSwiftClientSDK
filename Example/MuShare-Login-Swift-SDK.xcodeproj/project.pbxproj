@@ -16,6 +16,7 @@
 		77760BA222B2251500A581D4 /* MuShareLogin.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77760BA122B2251400A581D4 /* MuShareLogin.podspec */; };
 		A22817B4F3D399AB1117E263 /* Pods_MuShare_Login_Swift_SDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAABB46D53AA760619577BD6 /* Pods_MuShare_Login_Swift_SDK_Tests.framework */; };
 		BB3106ED22B4AD94009B9DCF /* RegisterByEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3106EC22B4AD94009B9DCF /* RegisterByEmailViewController.swift */; };
+		BB3106F122B4B527009B9DCF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3106F022B4B527009B9DCF /* UIViewController+Extension.swift */; };
 		E7E0BEF2F55D38263F5A80C0 /* Pods_MuShare_Login_Swift_SDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FFB4A744E007D6B45C111D /* Pods_MuShare_Login_Swift_SDK_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		9969B9ECB224DB882AA49CE6 /* Pods-MuShare-Login-Swift-SDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuShare-Login-Swift-SDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-MuShare-Login-Swift-SDK_Example/Pods-MuShare-Login-Swift-SDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9AACCC7A960887767638717B /* Pods-MuShare-Login-Swift-SDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuShare-Login-Swift-SDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-MuShare-Login-Swift-SDK_Tests/Pods-MuShare-Login-Swift-SDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BB3106EC22B4AD94009B9DCF /* RegisterByEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterByEmailViewController.swift; sourceTree = "<group>"; };
+		BB3106F022B4B527009B9DCF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		D8CC2D3CE2E68B472C724CE4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		DAABB46D53AA760619577BD6 /* Pods_MuShare_Login_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MuShare_Login_Swift_SDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* LoginViewController.swift */,
 				BB3106EC22B4AD94009B9DCF /* RegisterByEmailViewController.swift */,
+				BB3106F022B4B527009B9DCF /* UIViewController+Extension.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3106F122B4B527009B9DCF /* UIViewController+Extension.swift in Sources */,
 				607FACD81AFB9204008FA782 /* LoginViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				BB3106ED22B4AD94009B9DCF /* RegisterByEmailViewController.swift in Sources */,
