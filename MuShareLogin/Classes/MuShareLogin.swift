@@ -1,20 +1,22 @@
 
 import Alamofire
 
-final class MuShareLogin {
+public enum MuShareLoginError: Error {
     
-    static let shared = MuShareLogin()
+}
+
+final public class MuShareLogin {
+    
+    public static let shared = MuShareLogin()
     
     private init() {}
     
     private var server: String = ""
-    private var appId: String = ""
-    private var apiSecret: String = ""
+    private var sdkSecret: String = ""
     
     private func header() -> HTTPHeaders? {
         let headers: HTTPHeaders = [
-            "appId": appId,
-            "apiSecret": apiSecret
+            "sdkSecret": sdkSecret
         ]
         return headers
     }
@@ -23,13 +25,14 @@ final class MuShareLogin {
         return server + "/" + relativeUrl
     }
     
-    func setup(server: String, appId: String, apiSecret: String) {
-        self.server = server
-        self.appId = appId
-        self.apiSecret = apiSecret
+    public static func setup(server: String, sdkSecret: String) {
+        MuShareLogin.shared.server = server
+        MuShareLogin.shared.sdkSecret = sdkSecret
     }
     
-    func registerByEmail(address: String, password: String, name: String) {
+    public typealias ErrorCompletion = (MuShareLoginError) -> Void
+    
+    public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         Alamofire.request(
             url(from: "sdk/register/email"),
             method: .post,
@@ -40,8 +43,13 @@ final class MuShareLogin {
             ],
             encoding: URLEncoding.default,
             headers: header()
-        ).responseJSON { response in
-            
+        ).responseJSON { 
+            let response = MuShareResponse($0)
+            if response.statusOK() {
+                success()
+            } else {
+                
+            }
         }
     }
     
