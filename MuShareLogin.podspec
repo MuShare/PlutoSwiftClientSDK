@@ -34,4 +34,5 @@ TODO: Add long description of the pod here.
   
   s.dependency 'Alamofire', '~> 4'
   s.dependency 'SwiftyJSON', '~> 5'
+  s.dependency 'SwiftyUserDefaults', '~> 4'
 end

@@ -39,4 +39,7 @@ public enum MuShareLoginError: Int, Error {
     case badRequest = -99999
     case sdkSecret = 2001
     case emailExist = 2011
+    case emailNotExist = 2022
+    case personNotFound = 2023
+    case passwordWrong = 2024
 }

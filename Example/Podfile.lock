@@ -3,7 +3,9 @@ PODS:
   - MuShareLogin (0.1):
     - Alamofire (~> 4)
     - SwiftyJSON (~> 5)
+    - SwiftyUserDefaults (~> 4)
   - SwiftyJSON (5.0.0)
+  - SwiftyUserDefaults (4.0.0)
 
 DEPENDENCIES:
   - MuShareLogin (from `../`)
@@ -12,6 +14,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - SwiftyJSON
+    - SwiftyUserDefaults
 
 EXTERNAL SOURCES:
   MuShareLogin:
@@ -19,8 +22,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  MuShareLogin: e2167038a8710573d77d01f4f8af2611db98b5ff
+  MuShareLogin: 32052d4eaab436d71c4fef94407abae2de488f82
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
 PODFILE CHECKSUM: ddf53fb22eb7d1cae138cfb3c2b7117d966e3725
 

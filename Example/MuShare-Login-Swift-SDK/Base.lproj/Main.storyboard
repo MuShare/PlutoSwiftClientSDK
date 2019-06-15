@@ -52,6 +52,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkw-KG-dld">
                                 <rect key="frame" x="168.5" y="186" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginWithEmail:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MH4-OK-IeY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eU-6d-pwr">
                                 <rect key="frame" x="128.5" y="617" width="118" height="30"/>
@@ -76,6 +79,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MuShareLogin" id="RGy-4W-LH1"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="o3h-Ab-OyP" id="LAh-kj-1iD"/>
+                        <outlet property="passwordTextField" destination="8i0-ak-Dym" id="SBD-3K-O2W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
