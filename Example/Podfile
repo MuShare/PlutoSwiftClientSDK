@@ -1,10 +1,6 @@
 use_frameworks!
 platform :ios, '10.0'
 
-target 'MuShare-Login-Swift-SDK_Example' do
-  pod 'MuShareLogin', :path => '../'
-
-  target 'MuShare-Login-Swift-SDK_Tests' do
-    inherit! :search_paths
-  end
+target 'Pluto-Example' do
+  pod 'Pluto', :path => '../'
 end

@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'MuShareLogin'
+  s.name             = 'Pluto'
   s.version          = '0.1'
   s.summary          = 'A short description of MuShare-Login-Swift-SDK.'
 
@@ -21,16 +21,16 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/lm2343635/MuShare-Login-Swift-SDK'
+  s.homepage         = 'https://github.com/MuShare/Pluto-Swift-SDK'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lm2343635' => 'lm2343635@126.com' }
-  s.source           = { :git => 'https://github.com/lm2343635/MuShare-Login-Swift-SDK.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/MuShare/Pluto-Swift-SDK.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MuShareLogin/Classes/**/*'
+  s.source_files = 'Pluto/Classes/**/*'
   
   s.dependency 'Alamofire', '~> 4'
   s.dependency 'SwiftyJSON', '~> 5'

@@ -13,5 +13,5 @@ before_install:
 - pod install --project-directory=Example
 
 script:
-- set -o pipefail && xcodebuild -workspace Example/MuShare-Login-Swift-SDK.xcworkspace -scheme MuShare-Login-Swift-SDK-Example -sdk iphonesimulator build CODE_SIGNING_REQUIRED=NO | xcpretty -c
+- set -o pipefail && xcodebuild -workspace Example/Pluto-Example.xcworkspace -scheme Pluto-Example -sdk iphonesimulator build CODE_SIGNING_REQUIRED=NO | xcpretty -c
 
