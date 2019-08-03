@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        MuShareLogin.setup(server: "http://127.0.0.1:8080", sdkSecret: "8d4f392a-853e-43eb-a5e1-ff05fb32d3df")
+        MuShareLogin.setup(server: "https://pluto.mushare.cn", sdkSecret: "8d4f392a-853e-43eb-a5e1-ff05fb32d3df")
         return true
     }
     

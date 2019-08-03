@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
             return
         }
         MuShareLogin.shared.loginWithEmail(address: address, password: password, success: { [weak self] in
-            self?.showAlert(title: "Login", content: "Login success for " + address + " , accessToken is " + MuShareLogin.accessToken())
+            self?.showAlert(title: "Login", content: "Login success for " + address + " , refreshToken is " + MuShareLogin.refreshToken() + ", jwt expire at " + MuShareLogin.expire().description)
             self?.navigationController?.popViewController(animated: true)
         }, error: { [weak self] error in
             self?.showAlert(title: "Error", content: error.localizedDescription)

@@ -2,7 +2,8 @@
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let accessToken = DefaultsKey<String?>("accessToken")
+    static let refreshToken = DefaultsKey<String?>("refreshToken")
+    static let expire = DefaultsKey<Int?>("0")
 }
 
 class DefaultsManager {
@@ -11,12 +12,21 @@ class DefaultsManager {
     
     private init() {}
     
-    var accessToken: String? {
+    var refreshToken: String? {
         set {
-            Defaults[.accessToken] = newValue
+            Defaults[.refreshToken] = newValue
         }
         get {
-            return Defaults[.accessToken]
+            return Defaults[.refreshToken]
+        }
+    }
+    
+    var expire: Int? {
+        set {
+            Defaults[.expire] = newValue
+        }
+        get {
+            return Defaults[.expire]
         }
     }
     

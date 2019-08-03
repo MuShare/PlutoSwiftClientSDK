@@ -1,5 +1,6 @@
 
 import Alamofire
+import SwiftyJSON
 
 final public class MuShareLogin {
     
@@ -26,24 +27,28 @@ final public class MuShareLogin {
         MuShareLogin.shared.sdkSecret = sdkSecret
     }
     
-    public static func accessToken() -> String {
-        return DefaultsManager.shared.accessToken ?? ""
+    public static func refreshToken() -> String {
+        return DefaultsManager.shared.refreshToken ?? ""
+    }
+    
+    public static func expire() -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(DefaultsManager.shared.expire ?? 0))
     }
     
     public typealias ErrorCompletion = (MuShareLoginError) -> Void
     
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         Alamofire.request(
-            url(from: "sdk/register/email"),
+            url(from: "api/user/register"),
             method: .post,
             parameters: [
-                "address": address,
+                "mail": address,
                 "password": password,
                 "name": name
             ],
-            encoding: URLEncoding.default,
-            headers: header()
-        ).responseJSON { 
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON {
             let response = MuShareResponse($0)
             if response.statusOK() {
                 success()
@@ -55,22 +60,34 @@ final public class MuShareLogin {
     
     public func loginWithEmail(address: String, password: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         Alamofire.request(
-            url(from: "sdk/login/email"),
+            url(from: "api/user/login"),
             method: .post,
             parameters: [
-                "address": address,
+                "mail": address,
                 "password": password,
-                "identifier": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
-                "os": "ios",
-                "version": UIDevice.current.systemVersion,
-                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
+                "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
+                "app_id": "easyjapanese"
+//                "version": UIDevice.current.systemVersion,
+//                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
             ],
-            encoding: URLEncoding.default,
-            headers: header()
+            encoding: JSONEncoding.default,
+            headers: nil
         ).responseJSON {
             let response = MuShareResponse($0)
             if response.statusOK() {
-                DefaultsManager.shared.accessToken = response.getResult()["accessToken"].stringValue
+                let body = response.getBody()
+                DefaultsManager.shared.refreshToken = body["refresh_token"].stringValue
+                
+                let parts = body["jwt"].stringValue.split(separator: ".").map(String.init)
+                guard
+                    parts.count == 3, let restoreData = Data(base64Encoded: parts[1]),
+                    let restoreString = String(data: restoreData, encoding: .utf8)
+                else {
+                    // TODO: Throw error here.
+                    return
+                }
+                let user = JSON(parseJSON: restoreString)
+                DefaultsManager.shared.expire = user["expire"].intValue
                 success()
             } else {
                 error?(response.errorCode())
