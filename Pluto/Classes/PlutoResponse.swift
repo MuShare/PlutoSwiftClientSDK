@@ -2,7 +2,7 @@
 import Alamofire
 import SwiftyJSON
 
-struct MuShareResponse {
+struct PlutoResponse {
 
     var data: [String: Any] = [:]
     

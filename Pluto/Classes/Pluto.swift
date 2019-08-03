@@ -2,29 +2,20 @@
 import Alamofire
 import SwiftyJSON
 
-final public class MuShareLogin {
+final public class Pluto {
     
-    public static let shared = MuShareLogin()
+    public static let shared = Pluto()
     
     private init() {}
     
     private var server: String = ""
-    private var sdkSecret: String = ""
-    
-    private func header() -> HTTPHeaders? {
-        let headers: HTTPHeaders = [
-            "sdkSecret": sdkSecret
-        ]
-        return headers
-    }
-    
+   
     private func url(from relativeUrl: String) -> String {
         return server + "/" + relativeUrl
     }
     
-    public static func setup(server: String, sdkSecret: String) {
-        MuShareLogin.shared.server = server
-        MuShareLogin.shared.sdkSecret = sdkSecret
+    public static func setup(server: String) {
+        Pluto.shared.server = server
     }
     
     public static func refreshToken() -> String {
@@ -49,7 +40,7 @@ final public class MuShareLogin {
             encoding: JSONEncoding.default,
             headers: nil
         ).responseJSON {
-            let response = MuShareResponse($0)
+            let response = PlutoResponse($0)
             if response.statusOK() {
                 success()
             } else {
@@ -73,7 +64,7 @@ final public class MuShareLogin {
             encoding: JSONEncoding.default,
             headers: nil
         ).responseJSON {
-            let response = MuShareResponse($0)
+            let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
                 DefaultsManager.shared.refreshToken = body["refresh_token"].stringValue

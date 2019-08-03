@@ -26,8 +26,8 @@ class LoginViewController: UIViewController {
         else {
             return
         }
-        MuShareLogin.shared.loginWithEmail(address: address, password: password, success: { [weak self] in
-            self?.showAlert(title: "Login", content: "Login success for " + address + " , refreshToken is " + MuShareLogin.refreshToken() + ", jwt expire at " + MuShareLogin.expire().description)
+        Pluto.shared.loginWithEmail(address: address, password: password, success: { [weak self] in
+            self?.showAlert(title: "Login", content: "Login success for " + address + " , refreshToken is " + Pluto.refreshToken() + ", jwt expire at " + Pluto.expire().description)
             self?.navigationController?.popViewController(animated: true)
         }, error: { [weak self] error in
             self?.showAlert(title: "Error", content: error.localizedDescription)
