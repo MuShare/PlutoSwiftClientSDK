@@ -2,8 +2,8 @@
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let refreshToken = DefaultsKey<String?>("refreshToken")
-    static let expire = DefaultsKey<Int?>("0")
+    static let refreshToken = DefaultsKey<String?>("org.mushare.pluto.refreshToken")
+    static let expire = DefaultsKey<Int?>("org.mushare.pluto.exipre")
 }
 
 class DefaultsManager {
