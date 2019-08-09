@@ -14,6 +14,12 @@ final public class Pluto {
         return server + "/" + relativeUrl
     }
     
+    public typealias ErrorCompletion = (MuShareLoginError) -> Void
+    
+}
+
+extension Pluto {
+    
     public static func setup(server: String) {
         Pluto.shared.server = server
     }
@@ -26,7 +32,9 @@ final public class Pluto {
         return Date(timeIntervalSince1970: TimeInterval(DefaultsManager.shared.expire ?? 0))
     }
     
-    public typealias ErrorCompletion = (MuShareLoginError) -> Void
+}
+
+extension Pluto {
     
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         Alamofire.request(
@@ -78,12 +86,42 @@ final public class Pluto {
                     return
                 }
                 let user = JSON(parseJSON: restoreString)
+                print(user)
+                DefaultsManager.shared.userId = user["userId"].stringValue
                 DefaultsManager.shared.expire = user["expire"].intValue
                 success()
             } else {
                 error?(response.errorCode())
             }
         }
+    }
+    
+}
+
+extension Pluto {
+    
+    public func getToken(completion: (String) -> Void) {
+        
+    }
+    
+    private func refreshToken(completion: (String?) -> Void) {
+        guard
+            let userId = DefaultsManager.shared.userId,
+            let refreshToken = DefaultsManager.shared.refreshToken
+        else {
+            completion(nil)
+            return
+        }
+        Alamofire.request(
+            url(from: "api/auth/refresh"),
+            method: .post,
+            parameters: [
+                "refresh_token": refreshToken,
+                "user_id": userId,
+                "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
+                "app_id":"easyjapanese"
+            ]
+        )
     }
     
 }
