@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Pluto.setup(server: "https://pluto.mushare.cn", appId: "org.mushare.pluto")
+        Pluto.shared.setup(server: "https://pluto.mushare.cn", appId: "org.mushare.pluto")
         return true
     }
     

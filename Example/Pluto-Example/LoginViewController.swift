@@ -16,7 +16,15 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        Pluto.shared.observeState { [unowned self] state in
+            switch state {
+            case .signin:
+                self.performSegue(withIdentifier: "userSegue", sender: self)
+            default:
+                break
+            }
+        }
     }
     
     @IBAction func loginWithEmail(_ sender: Any) {
@@ -26,10 +34,7 @@ class LoginViewController: UIViewController {
         else {
             return
         }
-        Pluto.shared.loginWithEmail(address: address, password: password, success: { [weak self] in
-            self?.showAlert(title: "Login", content: "Login success for " + address + " , refreshToken is " + Pluto.refreshToken() + ", jwt expire at " + Pluto.expire().description)
-            self?.performSegue(withIdentifier: "userSegue", sender: self)
-        }, error: { [weak self] error in
+        Pluto.shared.loginWithEmail(address: address, password: password, error: { [weak self] error in
             self?.showAlert(title: "Error", content: error.localizedDescription)
         })
     }

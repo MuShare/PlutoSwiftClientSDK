@@ -37,8 +37,9 @@ struct PlutoResponse {
 }
 
 public enum PlutoError: Int, Error {
-    case badRequest = -99999
-    case parseError = -99998
+    case unknown = -99999
+    case badRequest = -99998
+    case parseError = -99997
     case sdkSecret = 2001
     case emailExist = 2011
     case emailNotExist = 2022

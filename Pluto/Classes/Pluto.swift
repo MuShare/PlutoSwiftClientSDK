@@ -4,40 +4,55 @@ import SwiftyJSON
 
 final public class Pluto {
     
-    public static let shared = Pluto()
+    public typealias ErrorCompletion = (PlutoError) -> Void
     
-    private init() {}
+    public enum State {
+        case notSignin
+        case loading
+        case signin
+    }
+    
+    public static let shared = Pluto()
     
     private var server: String = ""
     private var appId: String = ""
+    
+    private var stateObserver: ((State) -> Void)?
+    private var state: State = .loading {
+        didSet {
+            stateObserver?(state)
+        }
+    }
+    
+    private let devideId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+    
+    private init() {}
    
     private func url(from relativeUrl: String) -> String {
         return server + "/" + relativeUrl
     }
     
-    public typealias ErrorCompletion = (PlutoError) -> Void
+    public func setup(server: String, appId: String) {
+        self.server = server
+        self.appId = appId
+        
+        refreshToken { [unowned self] in
+            guard $0 != nil else {
+                self.state = .notSignin
+                return
+            }
+            self.state = .signin
+        }
+    }
     
+    public func observeState(observer: ((State) -> Void)?) {
+        stateObserver = observer
+    }
+
 }
 
 extension Pluto {
-    
-    public static func setup(server: String, appId: String) {
-        Pluto.shared.server = server
-        Pluto.shared.appId = appId
-    }
-    
-    public static func refreshToken() -> String {
-        return DefaultsManager.shared.refreshToken ?? ""
-    }
-    
-    public static func expire() -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(DefaultsManager.shared.expire))
-    }
-    
-}
 
-extension Pluto {
-    
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         Alamofire.request(
             url(from: "api/user/register"),
@@ -59,21 +74,25 @@ extension Pluto {
         }
     }
     
-    public func loginWithEmail(address: String, password: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+    public func loginWithEmail(address: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         Alamofire.request(
             url(from: "api/user/login"),
             method: .post,
             parameters: [
                 "mail": address,
                 "password": password,
-                "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
+                "device_id": devideId,
                 "app_id": appId
 //                "version": UIDevice.current.systemVersion,
 //                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
             ],
             encoding: JSONEncoding.default,
             headers: nil
-        ).responseJSON {
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
+            }
             let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
@@ -107,7 +126,8 @@ extension Pluto {
                 }
                 DefaultsManager.shared.userId = userId
                 DefaultsManager.shared.expire = expire
-                success()
+                self.state = .signin
+                success?()
             } else {
                 error?(response.errorCode())
             }
@@ -144,7 +164,7 @@ extension Pluto {
             parameters: [
                 "refresh_token": refreshToken,
                 "user_id": userId,
-                "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
+                "device_id": devideId,
                 "app_id": appId
             ],
             encoding: JSONEncoding.default
