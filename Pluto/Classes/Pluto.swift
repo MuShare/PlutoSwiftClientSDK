@@ -116,14 +116,16 @@ extension Pluto {
 
 extension Pluto {
     
-    public func getToken(completion: @escaping (String) -> Void) {
-        refreshToken {
-            guard let token = $0 else {
-                completion("")
-                return
-            }
-            completion(token)
+    public func getToken(completion: @escaping (String?) -> Void) {
+        let expire = DefaultsManager.shared.expire
+        guard
+            let jwt = DefaultsManager.shared.jwt,
+            expire - Int(Date().timeIntervalSince1970) > 5 * 60
+        else {
+            refreshToken(completion: completion)
+            return
         }
+        completion(jwt)
     }
     
     private func refreshToken(completion: @escaping (String?) -> Void) {
