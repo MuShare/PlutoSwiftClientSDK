@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         }
         Pluto.shared.loginWithEmail(address: address, password: password, success: { [weak self] in
             self?.showAlert(title: "Login", content: "Login success for " + address + " , refreshToken is " + Pluto.refreshToken() + ", jwt expire at " + Pluto.expire().description)
-            self?.navigationController?.popViewController(animated: true)
+            self?.performSegue(withIdentifier: "userSegue", sender: self)
         }, error: { [weak self] error in
             self?.showAlert(title: "Error", content: error.localizedDescription)
         })

@@ -2,9 +2,10 @@
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
+    static let jwt = DefaultsKey<String?>("org.mushare.pluto.jwt")
     static let refreshToken = DefaultsKey<String?>("org.mushare.pluto.refreshToken")
-    static let expire = DefaultsKey<Int?>("org.mushare.pluto.exipre")
-    static let userId = DefaultsKey<String?>("org.mushare.pluto.userId")
+    static let expire = DefaultsKey<Int>("org.mushare.pluto.exipre", defaultValue: 0)
+    static let userId = DefaultsKey<Int?>("org.mushare.pluto.userId")
 }
 
 class DefaultsManager {
@@ -12,6 +13,15 @@ class DefaultsManager {
     static let shared = DefaultsManager()
     
     private init() {}
+    
+    var jwt: String? {
+        set {
+            Defaults[.jwt] = newValue
+        }
+        get {
+            return Defaults[.jwt]
+        }
+    }
     
     var refreshToken: String? {
         set {
@@ -22,7 +32,7 @@ class DefaultsManager {
         }
     }
     
-    var expire: Int? {
+    var expire: Int {
         set {
             Defaults[.expire] = newValue
         }
@@ -31,7 +41,7 @@ class DefaultsManager {
         }
     }
     
-    var userId: String? {
+    var userId: Int? {
         set {
             Defaults[.userId] = newValue
         }

@@ -27,17 +27,18 @@ struct PlutoResponse {
         return JSON(result)
     }
     
-    func errorCode() -> MuShareLoginError {
+    func errorCode() -> PlutoError {
         guard !data.isEmpty, let code = data["error"] as? Int else {
             return .badRequest
         }
-        return MuShareLoginError(rawValue: code) ?? .badRequest
+        return PlutoError(rawValue: code) ?? .badRequest
     }
     
 }
 
-public enum MuShareLoginError: Int, Error {
+public enum PlutoError: Int, Error {
     case badRequest = -99999
+    case parseError = -99998
     case sdkSecret = 2001
     case emailExist = 2011
     case emailNotExist = 2022

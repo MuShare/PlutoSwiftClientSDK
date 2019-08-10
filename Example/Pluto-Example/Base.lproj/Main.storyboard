@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-1002" y="-118"/>
         </scene>
-        <!--MuShareLogin-->
+        <!--Pluto Login-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="Pluto_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,11 +78,11 @@
                             <constraint firstItem="o3h-Ab-OyP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="zV1-Kh-YWY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MuShareLogin" id="RGy-4W-LH1"/>
+                    <navigationItem key="navigationItem" title="Pluto Login" id="RGy-4W-LH1"/>
                     <connections>
                         <outlet property="emailTextField" destination="o3h-Ab-OyP" id="LAh-kj-1iD"/>
                         <outlet property="passwordTextField" destination="8i0-ak-Dym" id="SBD-3K-O2W"/>
-                        <segue destination="VD1-ya-afd" kind="modal" id="jHr-yq-HyK"/>
+                        <segue destination="VD1-ya-afd" kind="modal" identifier="userSegue" id="jHr-yq-HyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -162,17 +162,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="PkW-NZ-hv0" kind="push" id="8nH-qi-6CC"/>
+                        <segue destination="PkW-NZ-hv0" kind="relationship" relationship="rootViewController" id="IHf-fH-l5O"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJ5-l4-bTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="916" y="-488"/>
         </scene>
-        <!--View Controller-->
+        <!--Pluto-->
         <scene sceneID="vqQ-at-00d">
             <objects>
-                <viewController id="PkW-NZ-hv0" sceneMemberID="viewController">
+                <viewController id="PkW-NZ-hv0" customClass="UserViewController" customModule="Pluto_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sMq-pN-e1s"/>
                         <viewControllerLayoutGuide type="bottom" id="xCI-fA-ZZv"/>
@@ -182,7 +182,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Xyp-lr-N8S"/>
+                    <navigationItem key="navigationItem" title="Pluto" id="Xyp-lr-N8S">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="mjd-Ai-ypw">
+                            <connections>
+                                <action selector="refresh:" destination="PkW-NZ-hv0" id="QBy-DW-IxO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gR8-gi-uEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -14,6 +14,7 @@
 		77A9A7DF22F55A75003B4DE6 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A9A7DC22F55A75003B4DE6 /* UIViewController+Extension.swift */; };
 		77A9A7E022F55A75003B4DE6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A9A7DD22F55A75003B4DE6 /* LoginViewController.swift */; };
 		77A9A7E122F55A75003B4DE6 /* RegisterByEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A9A7DE22F55A75003B4DE6 /* RegisterByEmailViewController.swift */; };
+		BB57304622FE824A005F73EA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57304522FE824A005F73EA /* UserViewController.swift */; };
 		DC2771C0ED50FB1BC5543E8E /* Pods_Pluto_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F32CEFD6A83F67C237A65B /* Pods_Pluto_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		77A9A7DD22F55A75003B4DE6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		77A9A7DE22F55A75003B4DE6 /* RegisterByEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterByEmailViewController.swift; sourceTree = "<group>"; };
 		7FD7852ECC2726B73F749D64 /* Pods-Pluto-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pluto-Example.release.xcconfig"; path = "Target Support Files/Pods-Pluto-Example/Pods-Pluto-Example.release.xcconfig"; sourceTree = "<group>"; };
+		BB57304522FE824A005F73EA /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				77A9A7B422F54FDA003B4DE6 /* AppDelegate.swift */,
 				77A9A7DD22F55A75003B4DE6 /* LoginViewController.swift */,
 				77A9A7DE22F55A75003B4DE6 /* RegisterByEmailViewController.swift */,
+				BB57304522FE824A005F73EA /* UserViewController.swift */,
 				77A9A7DC22F55A75003B4DE6 /* UIViewController+Extension.swift */,
 				77A9A7B822F54FDA003B4DE6 /* Main.storyboard */,
 				77A9A7BB22F54FDC003B4DE6 /* Assets.xcassets */,
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A9A7E022F55A75003B4DE6 /* LoginViewController.swift in Sources */,
+				BB57304622FE824A005F73EA /* UserViewController.swift in Sources */,
 				77A9A7DF22F55A75003B4DE6 /* UIViewController+Extension.swift in Sources */,
 				77A9A7E122F55A75003B4DE6 /* RegisterByEmailViewController.swift in Sources */,
 				77A9A7B522F54FDA003B4DE6 /* AppDelegate.swift in Sources */,

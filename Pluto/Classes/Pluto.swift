@@ -14,7 +14,7 @@ final public class Pluto {
         return server + "/" + relativeUrl
     }
     
-    public typealias ErrorCompletion = (MuShareLoginError) -> Void
+    public typealias ErrorCompletion = (PlutoError) -> Void
     
 }
 
@@ -29,7 +29,7 @@ extension Pluto {
     }
     
     public static func expire() -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(DefaultsManager.shared.expire ?? 0))
+        return Date(timeIntervalSince1970: TimeInterval(DefaultsManager.shared.expire))
     }
     
 }
@@ -75,20 +75,36 @@ extension Pluto {
             let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
-                DefaultsManager.shared.refreshToken = body["refresh_token"].stringValue
+                guard
+                    let refreshToken = body["refresh_token"].string,
+                    let jwt = body["jwt"].string
+                else {
+                    error?(PlutoError.parseError)
+                    return
+                }
                 
-                let parts = body["jwt"].stringValue.split(separator: ".").map(String.init)
+                DefaultsManager.shared.refreshToken = refreshToken
+                DefaultsManager.shared.jwt = jwt
+                
+                let parts = jwt.split(separator: ".").map(String.init)
                 guard
                     parts.count == 3, let restoreData = Data(base64Encoded: parts[1]),
                     let restoreString = String(data: restoreData, encoding: .utf8)
                 else {
-                    // TODO: Throw error here.
+                    error?(PlutoError.parseError)
                     return
                 }
+                
                 let user = JSON(parseJSON: restoreString)
-                print(user)
-                DefaultsManager.shared.userId = user["userId"].stringValue
-                DefaultsManager.shared.expire = user["expire"].intValue
+                guard
+                    let userId = user["userId"].int,
+                    let expire = user["expire"].int
+                else {
+                    error?(PlutoError.parseError)
+                    return
+                }
+                DefaultsManager.shared.userId = userId
+                DefaultsManager.shared.expire = expire
                 success()
             } else {
                 error?(response.errorCode())
@@ -100,11 +116,17 @@ extension Pluto {
 
 extension Pluto {
     
-    public func getToken(completion: (String) -> Void) {
-        
+    public func getToken(completion: @escaping (String) -> Void) {
+        refreshToken {
+            guard let token = $0 else {
+                completion("")
+                return
+            }
+            completion(token)
+        }
     }
     
-    private func refreshToken(completion: (String?) -> Void) {
+    private func refreshToken(completion: @escaping (String?) -> Void) {
         guard
             let userId = DefaultsManager.shared.userId,
             let refreshToken = DefaultsManager.shared.refreshToken
@@ -119,9 +141,21 @@ extension Pluto {
                 "refresh_token": refreshToken,
                 "user_id": userId,
                 "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
-                "app_id":"easyjapanese"
-            ]
-        )
+                "app_id": "easyjapanese"
+            ],
+            encoding: JSONEncoding.default
+        ).responseJSON {
+            let response = PlutoResponse($0)
+            if response.statusOK() {
+                let body = response.getBody()
+                guard let jwt = body["jwt"].string else {
+                    completion(nil)
+                    return
+                }
+                DefaultsManager.shared.jwt = jwt
+                completion(jwt)
+            }
+        }
     }
     
 }
