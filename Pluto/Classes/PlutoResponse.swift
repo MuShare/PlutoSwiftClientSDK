@@ -7,7 +7,7 @@ struct PlutoResponse {
     var data: [String: Any] = [:]
     
     init(_ response: DataResponse<Any>) {
-        if let value = response.result.value as? [String: Any] {
+        if let value = response.value as? [String: Any] {
             data = value
             print(value)
         }

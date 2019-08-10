@@ -54,7 +54,7 @@ final public class Pluto {
 extension Pluto {
 
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        Alamofire.request(
+        AF.request(
             url(from: "api/user/register"),
             method: .post,
             parameters: [
@@ -75,7 +75,7 @@ extension Pluto {
     }
     
     public func loginWithEmail(address: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
-        Alamofire.request(
+        AF.request(
             url(from: "api/user/login"),
             method: .post,
             parameters: [
@@ -158,7 +158,7 @@ extension Pluto {
             completion(nil)
             return
         }
-        Alamofire.request(
+        AF.request(
             url(from: "api/auth/refresh"),
             method: .post,
             parameters: [
