@@ -9,6 +9,7 @@ final public class Pluto {
     private init() {}
     
     private var server: String = ""
+    private var appId: String = ""
    
     private func url(from relativeUrl: String) -> String {
         return server + "/" + relativeUrl
@@ -20,8 +21,9 @@ final public class Pluto {
 
 extension Pluto {
     
-    public static func setup(server: String) {
+    public static func setup(server: String, appId: String) {
         Pluto.shared.server = server
+        Pluto.shared.appId = appId
     }
     
     public static func refreshToken() -> String {
@@ -65,7 +67,7 @@ extension Pluto {
                 "mail": address,
                 "password": password,
                 "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
-                "app_id": "easyjapanese"
+                "app_id": appId
 //                "version": UIDevice.current.systemVersion,
 //                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
             ],
@@ -143,7 +145,7 @@ extension Pluto {
                 "refresh_token": refreshToken,
                 "user_id": userId,
                 "device_id": UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString,
-                "app_id": "easyjapanese"
+                "app_id": appId
             ],
             encoding: JSONEncoding.default
         ).responseJSON {
