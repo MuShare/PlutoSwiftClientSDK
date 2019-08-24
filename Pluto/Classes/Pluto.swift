@@ -74,6 +74,25 @@ extension Pluto {
         }
     }
     
+    public func resendValidationEmail(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "api/user/register/verify/mail"),
+            method: .post,
+            parameters: [
+                "mail": address
+            ],
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON {
+            let response = PlutoResponse($0)
+            if response.statusOK() {
+                success()
+            } else {
+                error?(response.errorCode())
+            }
+        }
+    }
+    
     public func loginWithEmail(address: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "api/user/login"),
