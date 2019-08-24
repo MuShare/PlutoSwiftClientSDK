@@ -153,6 +153,25 @@ extension Pluto {
         }
     }
     
+    public func resetPassword(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "api/user/password/reset/mail"),
+            method: .post,
+            parameters: [
+                "mail": address
+            ],
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON {
+            let response = PlutoResponse($0)
+            if response.statusOK() {
+                success()
+            } else {
+                error?(response.errorCode())
+            }
+        }
+    }
+    
 }
 
 extension Pluto {
