@@ -28,7 +28,11 @@ struct PlutoResponse {
     }
     
     func errorCode() -> PlutoError {
-        guard !data.isEmpty, let code = data["error"] as? Int else {
+        guard
+            !data.isEmpty,
+            let error = data["error"] as? [String: Any],
+            let code = error["code"] as? Int
+        else {
             return .badRequest
         }
         return PlutoError(rawValue: code) ?? .badRequest
@@ -40,9 +44,11 @@ public enum PlutoError: Int, Error {
     case unknown = -99999
     case badRequest = -99998
     case parseError = -99997
-    case sdkSecret = 2001
-    case emailExist = 2011
-    case emailNotExist = 2022
-    case personNotFound = 2023
-    case passwordWrong = 2024
+    case mailIsAlreadyRegister = 2001
+    case mailIsNotExsit = 2002
+    case mailIsNotVerified = 2003
+    case mailAlreadyVerified = 2004
+    case invalidPassword = 3001
+    case invalidRefreshToken = 3002
+    case invalidJWTToekn = 3003
 }
