@@ -30,6 +30,8 @@ extension DefaultsKeys {
     static let refreshToken = DefaultsKey<String?>("org.mushare.pluto.refreshToken")
     static let expire = DefaultsKey<Int>("org.mushare.pluto.exipre", defaultValue: 0)
     static let userId = DefaultsKey<Int?>("org.mushare.pluto.userId")
+    static let username = DefaultsKey<String?>("org.mushare.pluto.username")
+    static let avatar = DefaultsKey<String?>("org.mushare.pluto.avatar")
 }
 
 class DefaultsManager {
@@ -71,6 +73,24 @@ class DefaultsManager {
         }
         get {
             return Defaults[.userId]
+        }
+    }
+
+    var username: String? {
+        set {
+            Defaults[.username] = newValue
+        }
+        get {
+            return Defaults[.username]
+        }
+    }
+
+    var avatar: String? {
+        set {
+            Defaults[.avatar] = newValue
+        }
+        get {
+            return Defaults[.avatar]
         }
     }
     
