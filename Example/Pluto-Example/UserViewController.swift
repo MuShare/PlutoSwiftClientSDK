@@ -12,6 +12,12 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Pluto.shared.myInfo(success: {
+            print($0)
+        }, error: {
+            print($0)
+        })
     }
     
     @IBAction func refresh(_ sender: Any) {

@@ -26,6 +26,13 @@
 import Alamofire
 import SwiftyJSON
 
+public struct PlutoUser {
+    let id: Int
+    let mail: String
+    let avatar: String
+    let name: String
+}
+
 final public class Pluto {
     
     public typealias ErrorCompletion = (PlutoError) -> Void
@@ -196,7 +203,7 @@ extension Pluto {
         }
     }
 
-    public func myInfo(success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+    public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
         guard let jwt = DefaultsManager.shared.jwt else {
             error?(PlutoError.notSignin)
             return
@@ -211,7 +218,15 @@ extension Pluto {
         ).responseJSON {
             let response = PlutoResponse($0)
             if response.statusOK() {
-                print(response.getBody())
+                let result = response.getBody()
+                let user = PlutoUser(
+                    id: result["id"].intValue,
+                    mail: result["mail"].stringValue,
+                    avatar: result["avatar"].stringValue,
+                    name: result["name"].stringValue
+                )
+                DefaultsManager.shared.user = user
+                success(user)
             } else {
                 print(response.errorCode())
                 error?(response.errorCode())
