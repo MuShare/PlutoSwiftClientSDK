@@ -27,10 +27,10 @@ import Alamofire
 import SwiftyJSON
 
 public struct PlutoUser {
-    let id: Int
-    let mail: String
-    let avatar: String
-    let name: String
+    public let id: Int
+    public let mail: String
+    public let avatar: String
+    public let name: String
 }
 
 final public class Pluto {
