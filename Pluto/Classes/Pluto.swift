@@ -79,6 +79,10 @@ final public class Pluto {
     public func observeState(observer: ((State) -> Void)?) {
         stateObserver = observer
     }
+    
+    public func currentState() -> Pluto.State {
+        return state
+    }
 
 }
 
@@ -228,7 +232,6 @@ extension Pluto {
                 DefaultsManager.shared.user = user
                 success(user)
             } else {
-                print(response.errorCode())
                 error?(response.errorCode())
             }
         }
