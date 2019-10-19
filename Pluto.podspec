@@ -28,11 +28,11 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/MuShare/Pluto-Swift-SDK.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'Pluto/Classes/**/*'
   
-  s.dependency 'Alamofire'
+  s.dependency 'Alamofire', '5.0.0-rc.2'
   s.dependency 'SwiftyJSON', '~> 5'
   s.dependency 'SwiftyUserDefaults', '~> 4'
 end

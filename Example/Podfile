@@ -1,7 +1,7 @@
 use_frameworks!
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'Pluto-Example' do
   pod 'Pluto', :path => '../'
-  pod 'Alamofire', '5.0.0-beta.7'
+  pod 'Alamofire'
 end

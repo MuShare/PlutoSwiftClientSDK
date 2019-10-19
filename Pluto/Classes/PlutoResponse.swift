@@ -30,7 +30,7 @@ struct PlutoResponse {
 
     var data: [String: Any] = [:]
     
-    init(_ response: DataResponse<Any>) {
+    init(_ response: AFDataResponse<Any>) {
         if let value = response.value as? [String: Any] {
             data = value
             print(value)
