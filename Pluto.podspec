@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Pluto/Classes/**/*'
   
-  s.dependency 'Alamofire', '5.0.0-rc.2'
+  s.dependency 'Alamofire', '5.0.0-rc.3'
   s.dependency 'SwiftyJSON', '~> 5'
   s.dependency 'SwiftyUserDefaults', '~> 4'
 end

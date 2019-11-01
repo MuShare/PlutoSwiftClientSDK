@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (5.0.0-rc.2)
+  - Alamofire (5.0.0-rc.3)
   - Pluto (0.1):
-    - Alamofire (= 5.0.0-rc.2)
+    - Alamofire (= 5.0.0-rc.3)
     - SwiftyJSON (~> 5)
     - SwiftyUserDefaults (~> 4)
   - SwiftyJSON (5.0.0)
@@ -22,8 +22,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
-  Pluto: c3e7eefbc9dc995de14dd87e71571fe00af3bd46
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  Pluto: 690d274220e98a505ef44801fb35fffc6e91b1dd
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
