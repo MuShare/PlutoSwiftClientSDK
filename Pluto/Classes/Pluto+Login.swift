@@ -147,4 +147,9 @@ extension Pluto {
         }
     }
     
+    public func logout() {
+        DefaultsManager.shared.clear()
+        state = .notSignin
+    }
+    
 }

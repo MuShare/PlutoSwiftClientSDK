@@ -97,4 +97,12 @@ class DefaultsManager {
         }
     }
     
+    func clear() {
+        jwt = nil
+        refreshToken = nil
+        expire = 0
+        userId = nil
+        user = nil
+    }
+    
 }
