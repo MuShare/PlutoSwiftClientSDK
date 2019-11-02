@@ -2,7 +2,7 @@
 //  Pluto+Login.swift
 //  Pluto
 //
-//  Created by Meng Li  on 2019/11/01.
+//  Created by Meng Li on 2019/11/01.
 //  Copyright © 2018 MuShare. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -87,44 +87,26 @@ extension Pluto {
                 error?(PlutoError.unknown)
                 return
             }
-            let response = PlutoResponse($0)
-            if response.statusOK() {
-                let body = response.getBody()
-                guard
-                    let refreshToken = body["refresh_token"].string,
-                    let jwt = body["jwt"].string
-                else {
-                    error?(PlutoError.parseError)
-                    return
-                }
-                
-                DefaultsManager.shared.refreshToken = refreshToken
-                DefaultsManager.shared.jwt = jwt
-                
-                let parts = jwt.split(separator: ".").map(String.init)
-                guard
-                    parts.count == 3, let restoreData = Data(base64Encoded: parts[1]),
-                    let restoreString = String(data: restoreData, encoding: .utf8)
-                else {
-                    error?(PlutoError.parseError)
-                    return
-                }
-                
-                let user = JSON(parseJSON: restoreString)
-                guard
-                    let userId = user["userId"].int,
-                    let expire = user["expire_time"].int
-                else {
-                    error?(PlutoError.parseError)
-                    return
-                }
-                DefaultsManager.shared.userId = userId
-                DefaultsManager.shared.expire = expire
-                self.state = .signin
-                success?()
-            } else {
-                error?(response.errorCode())
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
+        }
+    }
+    public func loginWithGoogle(idToken: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "api/user/login/google/mobile"),
+            method: .post,
+            parameters: [
+                "id_token": idToken,
+                "device_id": devideId,
+                "app_id": appId
+            ],
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
             }
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
         }
     }
     
@@ -150,6 +132,43 @@ extension Pluto {
     public func logout() {
         DefaultsManager.shared.clear()
         state = .notSignin
+    }
+    
+    private func handleLogin(response: PlutoResponse, success: (() -> Void)?, error: ErrorCompletion?) {
+        if response.statusOK() {
+            let body = response.getBody()
+            guard
+                let refreshToken = body["refresh_token"].string,
+                let jwt = body["jwt"].string
+            else {
+                error?(PlutoError.parseError)
+                return
+            }
+            
+            DefaultsManager.shared.refreshToken = refreshToken
+            DefaultsManager.shared.jwt = jwt
+            
+            let parts = jwt.split(separator: ".").map(String.init)
+            guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
+                error?(PlutoError.parseError)
+                return
+            }
+            
+            let user = JSON(parseJSON: restoreString)
+            guard
+                let userId = user["userId"].int,
+                let expire = user["expire_time"].int
+            else {
+                error?(PlutoError.parseError)
+                return
+            }
+            DefaultsManager.shared.userId = userId
+            DefaultsManager.shared.expire = expire
+            self.state = .signin
+            success?()
+        } else {
+            error?(response.errorCode())
+        }
     }
     
 }

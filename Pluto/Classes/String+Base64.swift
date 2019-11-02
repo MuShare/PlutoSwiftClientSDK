@@ -1,8 +1,8 @@
 //
-//  Pluto+User.swift
+//  Defaults.swift
 //  Pluto
 //
-//  Created by Meng Li on 2019/01/01.
+//  Created by Meng Li on 2019/12/02.
 //  Copyright © 2018 MuShare. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,39 +23,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-import SwiftyJSON
+extension String {
 
-extension Pluto {
+    func base64Encoded() -> String? {
+        if let data = self.data(using: .utf8) {
+            return data.base64EncodedString()
+        }
+        return nil
+    }
     
-    public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
-       guard let jwt = DefaultsManager.shared.jwt else {
-           error?(PlutoError.notSignin)
-           return
-       }
-
-       AF.request(
-           url(from: "api/user/info/me"),
-           method: .get,
-           headers: [
-               "Authorization": "jwt " + Data(jwt.utf8).base64EncodedString()
-           ]
-       ).responseJSON {
-           let response = PlutoResponse($0)
-           if response.statusOK() {
-               let result = response.getBody()
-               let user = PlutoUser(
-                   id: result["id"].intValue,
-                   mail: result["mail"].stringValue,
-                   avatar: result["avatar"].stringValue,
-                   name: result["name"].stringValue
-               )
-               DefaultsManager.shared.user = user
-               success(user)
-           } else {
-               error?(response.errorCode())
-           }
-       }
-   }
-    
+    func base64Decoded() -> String? {
+        if let _ = self.range(of: ":")?.lowerBound {
+            return self
+        }
+        let base64String = self.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
+        let padding = base64String.count + (base64String.count % 4 != 0 ? (4 - base64String.count % 4) : 0)
+        if let decodedData = Data(base64Encoded: base64String.padding(toLength: padding, withPad: "=", startingAt: 0), options: NSData.Base64DecodingOptions(rawValue: 0)), let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue) {
+            return decodedString as String
+        }
+        return nil
+    }
 }
+
