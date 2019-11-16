@@ -110,13 +110,13 @@ extension Pluto {
         }
     }
 
-    public func loginWithApple(authCode: String, email: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+    public func loginWithApple(authCode: String, name: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "api/user/login/apple/mobile"),
             method: .post,
             parameters: [
                 "code": authCode,
-                "name": email,
+                "name": name,
                 "device_id": deviceId,
                 "apple_id": appId
             ],
