@@ -54,7 +54,7 @@ extension Pluto {
             parameters: [
                 "refresh_token": refreshToken,
                 "user_id": userId,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "app_id": appId
             ],
             encoding: JSONEncoding.default

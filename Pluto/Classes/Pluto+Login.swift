@@ -75,7 +75,7 @@ extension Pluto {
             parameters: [
                 "mail": address,
                 "password": password,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "app_id": appId
 //                "version": UIDevice.current.systemVersion,
 //                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
@@ -96,8 +96,29 @@ extension Pluto {
             method: .post,
             parameters: [
                 "id_token": idToken,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "app_id": appId
+            ],
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
+            }
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
+        }
+    }
+
+    public func loginWithApple(authCode: String, email: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "api/user/login/apple/mobile"),
+            method: .post,
+            parameters: [
+                "code": authCode,
+                "name": email,
+                "device_id": deviceId,
+                "apple_id": appId
             ],
             encoding: JSONEncoding.default,
             headers: nil
