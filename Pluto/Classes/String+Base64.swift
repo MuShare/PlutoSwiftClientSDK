@@ -38,10 +38,16 @@ extension String {
         }
         let base64String = self.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
         let padding = base64String.count + (base64String.count % 4 != 0 ? (4 - base64String.count % 4) : 0)
-        if let decodedData = Data(base64Encoded: base64String.padding(toLength: padding, withPad: "=", startingAt: 0), options: NSData.Base64DecodingOptions(rawValue: 0)), let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue) {
-            return decodedString as String
+        guard
+            let decodedData = Data(
+                base64Encoded: base64String.padding(toLength: padding, withPad: "=", startingAt: 0),
+                options: NSData.Base64DecodingOptions(rawValue: 0)
+            ),
+            let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue)
+        else {
+            return nil
         }
-        return nil
+        return decodedString as String
     }
 }
 
