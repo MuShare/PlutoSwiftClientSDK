@@ -29,26 +29,25 @@ import SwiftyJSON
 extension Pluto {
     
     public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
-       AF.request(
-           url(from: "api/user/info/me"),
-           method: .get,
-           headers: headers()
-       ).responseJSON {
-           let response = PlutoResponse($0)
-           if response.statusOK() {
-               let result = response.getBody()
-               let user = PlutoUser(
-                   id: result["id"].intValue,
-                   mail: result["mail"].stringValue,
-                   avatar: result["avatar"].stringValue,
-                   name: result["name"].stringValue
-               )
-               DefaultsManager.shared.user = user
-               success(user)
-           } else {
-               error?(response.errorCode())
-           }
-       }
+        let requestUrl = url(from: "api/user/info/me")
+        return getHeaders {
+            AF.request(requestUrl, method: .get, headers: $0).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    let result = response.getBody()
+                    let user = PlutoUser(
+                        id: result["id"].intValue,
+                        mail: result["mail"].stringValue,
+                        avatar: result["avatar"].stringValue,
+                        name: result["name"].stringValue
+                    )
+                    DefaultsManager.shared.user = user
+                    success(user)
+                } else {
+                    error?(response.errorCode())
+                }
+            }
+        }
    }
     
 }

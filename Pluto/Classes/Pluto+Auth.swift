@@ -27,7 +27,7 @@ import Alamofire
 import SwiftyJSON
 
 extension Pluto {
-    
+
     public func getToken(completion: @escaping (String?) -> Void) {
         let expire = DefaultsManager.shared.expire
         guard
@@ -68,6 +68,16 @@ extension Pluto {
                 }
                 completion(jwt)
             }
+        }
+    }
+    
+    func getHeaders(completion: @escaping (HTTPHeaders?) -> Void) {
+        getToken {
+            guard let jwt = $0 else {
+                completion(nil)
+                return
+            }
+            completion(["Authorization": "jwt " + jwt])
         }
     }
     
