@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Pluto'
+  s.name             = 'PlutoSDK'
   s.version          = '0.1'
   s.summary          = 'Swift SDK for Pluto login microservice.'
 
