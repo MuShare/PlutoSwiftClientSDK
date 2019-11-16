@@ -29,7 +29,7 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
-
+  s.swift_version = '5.0'
   s.source_files = 'Pluto/Classes/**/*'
   
   s.dependency 'Alamofire', '5.0.0-rc.3'
