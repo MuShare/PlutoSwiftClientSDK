@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 import Alamofire
-import SwiftyJSON
 
 extension Pluto {
 
@@ -165,26 +164,11 @@ extension Pluto {
                 error?(PlutoError.parseError)
                 return
             }
-            
             DefaultsManager.shared.refreshToken = refreshToken
-            DefaultsManager.shared.jwt = jwt
-            
-            let parts = jwt.split(separator: ".").map(String.init)
-            guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
+            guard DefaultsManager.shared.updateJwt(jwt) else {
                 error?(PlutoError.parseError)
                 return
             }
-            
-            let user = JSON(parseJSON: restoreString)
-            guard
-                let userId = user["userId"].int,
-                let expire = user["expire_time"].int
-            else {
-                error?(PlutoError.parseError)
-                return
-            }
-            DefaultsManager.shared.userId = userId
-            DefaultsManager.shared.expire = expire
             self.state = .signin
             success?()
         } else {

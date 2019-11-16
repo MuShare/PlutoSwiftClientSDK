@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import SwiftyJSON
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
@@ -95,6 +96,25 @@ class DefaultsManager {
             Defaults[.name] = newValue?.name
             Defaults[.avatar] = newValue?.avatar
         }
+    }
+    
+    func updateJwt(_ jwt: String) -> Bool {
+        let parts = jwt.split(separator: ".").map(String.init)
+        guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
+            return false
+        }
+        
+        let user = JSON(parseJSON: restoreString)
+        guard
+            let userId = user["userId"].int,
+            let expire = user["expire_time"].int
+        else {
+            return false
+        }
+        self.userId = userId
+        self.expire = expire
+        self.jwt = jwt
+        return true
     }
     
     func clear() {

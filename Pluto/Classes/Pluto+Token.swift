@@ -62,11 +62,10 @@ extension Pluto {
             let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
-                guard let jwt = body["jwt"].string else {
+                guard let jwt = body["jwt"].string, DefaultsManager.shared.updateJwt(jwt) else {
                     completion(nil)
                     return
                 }
-                DefaultsManager.shared.jwt = jwt
                 completion(jwt)
             }
         }
