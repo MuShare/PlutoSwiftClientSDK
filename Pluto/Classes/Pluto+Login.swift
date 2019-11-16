@@ -75,7 +75,7 @@ extension Pluto {
             parameters: [
                 "mail": address,
                 "password": password,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "app_id": appId
 //                "version": UIDevice.current.systemVersion,
 //                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
@@ -96,7 +96,7 @@ extension Pluto {
             method: .post,
             parameters: [
                 "id_token": idToken,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "app_id": appId
             ],
             encoding: JSONEncoding.default,
@@ -117,7 +117,7 @@ extension Pluto {
             parameters: [
                 "code": authCode,
                 "name": email,
-                "device_id": devideId,
+                "device_id": deviceId,
                 "apple_id": appId
             ],
             encoding: JSONEncoding.default,

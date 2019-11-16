@@ -55,7 +55,7 @@ final public class Pluto {
         }
     }
     
-    let devideId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     
     private init() {}
    
