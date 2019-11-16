@@ -109,6 +109,27 @@ extension Pluto {
             self.handleLogin(response: PlutoResponse($0), success: success, error: error)
         }
     }
+
+    public func loginWithApple(authCode: String, email: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "api/user/login/apple/mobile"),
+            method: .post,
+            parameters: [
+                "code": authCode,
+                "name": email,
+                "device_id": devideId,
+                "apple_id": appId
+            ],
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
+            }
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
+        }
+    }
     
     public func resetPassword(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
