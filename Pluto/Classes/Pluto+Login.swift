@@ -118,7 +118,7 @@ extension Pluto {
                 "code": authCode,
                 "name": name,
                 "device_id": deviceId,
-                "apple_id": appId
+                "app_id": appId
             ],
             encoding: JSONEncoding.default,
             headers: nil
