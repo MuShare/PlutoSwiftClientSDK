@@ -29,17 +29,10 @@ import SwiftyJSON
 extension Pluto {
     
     public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
-       guard let jwt = DefaultsManager.shared.jwt else {
-           error?(PlutoError.notSignin)
-           return
-       }
-
        AF.request(
            url(from: "api/user/info/me"),
            method: .get,
-           headers: [
-               "Authorization": "jwt " + Data(jwt.utf8).base64EncodedString()
-           ]
+           headers: headers()
        ).responseJSON {
            let response = PlutoResponse($0)
            if response.statusOK() {

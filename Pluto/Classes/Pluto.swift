@@ -63,6 +63,13 @@ final public class Pluto {
         return server + "/" + relativeUrl
     }
     
+    func headers() -> HTTPHeaders? {
+        guard let jwt = DefaultsManager.shared.jwt else {
+            return nil
+        }
+        return ["Authorization": "jwt " + jwt]
+    }
+    
     public func setup(server: String, appId: String) {
         self.server = server
         self.appId = appId
