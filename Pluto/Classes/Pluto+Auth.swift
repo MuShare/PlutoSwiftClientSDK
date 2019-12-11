@@ -71,7 +71,7 @@ extension Pluto {
         }
     }
     
-    func getHeaders(completion: @escaping (HTTPHeaders?) -> Void) {
+    public func getHeaders(completion: @escaping (HTTPHeaders?) -> Void) {
         getToken {
             guard let jwt = $0 else {
                 completion(nil)
