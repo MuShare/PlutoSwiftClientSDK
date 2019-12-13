@@ -6,7 +6,7 @@
 //  Copyright © 2019 MuShare. All rights reserved.
 //
 
-import Pluto
+import PlutoSDK
 
 class UserViewController: UIViewController {
     

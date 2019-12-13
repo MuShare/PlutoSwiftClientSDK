@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pluto
+import PlutoSDK
 
 class RegisterByEmailViewController: UIViewController {
     

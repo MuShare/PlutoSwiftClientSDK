@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pluto
+import PlutoSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
