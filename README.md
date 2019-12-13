@@ -9,11 +9,11 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
 
 ## Installation
 
-Pluto-Swift-SDK is available through [CocoaPods](https://cocoapods.org). To install
+The Swift SDK for Pluto is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'MuShare-Login-Swift-SDK'
+pod 'PlutoSDK'
 ```
 
 ## Author
