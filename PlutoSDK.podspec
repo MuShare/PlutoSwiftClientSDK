@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlutoSDK'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'Swift SDK for Pluto login microservice.'
 
 # This description is used to generate tags and improve search results.
@@ -26,13 +26,22 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lm2343635' => 'lm2343635@126.com' }
   s.source           = { :git => 'https://github.com/MuShare/Pluto-Swift-SDK.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
   s.swift_version = '5.0'
-  s.source_files = 'Pluto/Classes/**/*'
-  
-  s.dependency 'Alamofire', '5.0.0-rc.3'
-  s.dependency 'SwiftyJSON', '~> 5'
-  s.dependency 'SwiftyUserDefaults', '~> 4'
+
+  s.default_subspec = 'Core'
+
+  s.subspec 'Core' do |core|
+    core.source_files = 'Pluto/Classes/Core/**/*'
+    core.dependency 'Alamofire', '5.0.0-rc.3'
+    core.dependency 'SwiftyJSON', '~> 5'
+    core.dependency 'SwiftyUserDefaults', '~> 4'
+  end
+
+  s.subspec 'Rx' do |rx|
+    rx.source_files = 'Pluto/Classes/Rx/**/*'
+    rx.dependency 'PlutoSDK/Core', '~> 0'
+    rx.dependency 'RxCocoa', '~> 5'
+  end
 end
