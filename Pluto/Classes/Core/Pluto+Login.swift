@@ -37,7 +37,7 @@ extension Pluto {
                 "name": name
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON {
             let response = PlutoResponse($0)
             if response.statusOK() {
@@ -56,7 +56,7 @@ extension Pluto {
                 "mail": address
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON {
             let response = PlutoResponse($0)
             if response.statusOK() {
@@ -80,7 +80,7 @@ extension Pluto {
 //                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON { [weak self] in
             guard let `self` = self else {
                 error?(PlutoError.unknown)
@@ -99,7 +99,7 @@ extension Pluto {
                 "app_id": appId
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON { [weak self] in
             guard let `self` = self else {
                 error?(PlutoError.unknown)
@@ -120,7 +120,7 @@ extension Pluto {
                 "app_id": appId
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON { [weak self] in
             guard let `self` = self else {
                 error?(PlutoError.unknown)
@@ -138,7 +138,7 @@ extension Pluto {
                 "mail": address
             ],
             encoding: JSONEncoding.default,
-            headers: nil
+            headers: commonHeaders
         ).responseJSON {
             let response = PlutoResponse($0)
             if response.statusOK() {
