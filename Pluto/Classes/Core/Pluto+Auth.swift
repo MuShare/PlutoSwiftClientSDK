@@ -77,7 +77,9 @@ extension Pluto {
                 completion(nil)
                 return
             }
-            completion(["Authorization": "jwt " + jwt])
+            var headers = self.commonHeaders
+            headers.add(name: "Authorization", value: "jwt " + jwt)
+            completion(headers)
         }
     }
     

@@ -55,6 +55,18 @@ final public class Pluto {
         }
     }
     
+    lazy var commonHeaders: HTTPHeaders = {
+        // zh-Hans-JP -> zh-Hans
+        // zh-Hant-CN -> zh-Hant
+        // en-US      -> en-US
+        // en         -> en
+        let preferredLanguageCode = Locale.preferredLanguages.first?
+            .components(separatedBy: "-")
+            .prefix(2)
+            .joined(separator: "-")
+        return HTTPHeaders(["Accept-Language": preferredLanguageCode ?? "en"])
+    }()
+    
     let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     
     private init() {}
