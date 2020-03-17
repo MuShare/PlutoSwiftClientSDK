@@ -27,13 +27,13 @@ import SwiftyJSON
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let jwt = DefaultsKey<String?>("org.mushare.pluto.jwt")
-    static let refreshToken = DefaultsKey<String?>("org.mushare.pluto.refreshToken")
-    static let expire = DefaultsKey<Int>("org.mushare.pluto.exipre", defaultValue: 0)
-    static let userId = DefaultsKey<Int?>("org.mushare.pluto.userId")
-    static let mail = DefaultsKey<String?>("org.mushare.pluto.mail")
-    static let name = DefaultsKey<String?>("org.mushare.pluto.name")
-    static let avatar = DefaultsKey<String?>("org.mushare.pluto.avatar")
+    var jwt: DefaultsKey<String?> { .init("org.mushare.pluto.jwt") }
+    var refreshToken: DefaultsKey<String?> { .init("org.mushare.pluto.refreshToken") }
+    var expire: DefaultsKey<Int> { .init("org.mushare.pluto.exipre", defaultValue: 0) }
+    var userId: DefaultsKey<Int?> { .init("org.mushare.pluto.userId") }
+    var mail: DefaultsKey<String?> { .init("org.mushare.pluto.mail") }
+    var name: DefaultsKey<String?> { .init("org.mushare.pluto.name") }
+    var avatar: DefaultsKey<String?> { .init("org.mushare.pluto.avatar") }
 }
 
 class DefaultsManager {
@@ -44,57 +44,57 @@ class DefaultsManager {
     
     var jwt: String? {
         set {
-            Defaults[.jwt] = newValue
+            Defaults.jwt = newValue
         }
         get {
-            return Defaults[.jwt]
+            return Defaults.jwt
         }
     }
     
     var refreshToken: String? {
         set {
-            Defaults[.refreshToken] = newValue
+            Defaults.refreshToken = newValue
         }
         get {
-            return Defaults[.refreshToken]
+            return Defaults.refreshToken
         }
     }
     
     var expire: Int {
         set {
-            Defaults[.expire] = newValue
+            Defaults.expire = newValue
         }
         get {
-            return Defaults[.expire]
+            return Defaults.expire
         }
     }
     
     var userId: Int? {
         set {
-            Defaults[.userId] = newValue
+            Defaults.userId = newValue
         }
         get {
-            return Defaults[.userId]
+            return Defaults.userId
         }
     }
 
     var user: PlutoUser? {
         get {
             guard
-                let userId = Defaults[.userId],
-                let mail = Defaults[.mail],
-                let name = Defaults[.name],
-                let avatar = Defaults[.avatar]
+                let userId = Defaults.userId,
+                let mail = Defaults.mail,
+                let name = Defaults.name,
+                let avatar = Defaults.avatar
             else {
                 return nil
             }
             return PlutoUser(id: userId, mail: mail, avatar: avatar, name: name)
         }
         set {
-            Defaults[.userId] = newValue?.id
-            Defaults[.mail] = newValue?.mail
-            Defaults[.name] = newValue?.name
-            Defaults[.avatar] = newValue?.avatar
+            Defaults.userId = newValue?.id
+            Defaults.mail = newValue?.mail
+            Defaults.name = newValue?.name
+            Defaults.avatar = newValue?.avatar
         }
     }
     
