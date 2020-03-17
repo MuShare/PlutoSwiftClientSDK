@@ -36,7 +36,7 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
     core.source_files = 'Pluto/Classes/Core/**/*'
     core.dependency 'Alamofire', '~> 5'
     core.dependency 'SwiftyJSON', '~> 5'
-    core.dependency 'SwiftyUserDefaults', '~> 4'
+    core.dependency 'SwiftyUserDefaults', '~> 5'
   end
 
   s.subspec 'Rx' do |rx|

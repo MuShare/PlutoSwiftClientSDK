@@ -1,20 +1,20 @@
 PODS:
-  - Alamofire (5.0.0)
+  - Alamofire (5.0.4)
   - PlutoSDK/Core (0.1.3):
     - Alamofire (~> 5)
     - SwiftyJSON (~> 5)
-    - SwiftyUserDefaults (~> 4)
+    - SwiftyUserDefaults (~> 5)
   - PlutoSDK/Rx (0.1.3):
     - PlutoSDK/Core (~> 0)
     - RxCocoa (~> 5)
-  - RxCocoa (5.0.1):
+  - RxCocoa (5.1.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxRelay (5.0.1):
+  - RxRelay (5.1.0):
     - RxSwift (~> 5)
-  - RxSwift (5.0.1)
+  - RxSwift (5.1.0)
   - SwiftyJSON (5.0.0)
-  - SwiftyUserDefaults (4.0.0)
+  - SwiftyUserDefaults (5.0.0)
 
 DEPENDENCIES:
   - PlutoSDK/Rx (from `../`)
@@ -33,14 +33,14 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 58ff2bfb8daaacaa233d5c36e37b10a5248f59b1
-  PlutoSDK: 02be9f6f09f8964b4ed1cb158f44395073a6cdcc
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
+  PlutoSDK: 02cef8b236b52645187fc8f65785d8834cfea7e6
+  RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
+  RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
+  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
+  SwiftyUserDefaults: 33fcb42bd1feb53a37d873feb62c82967db5f7f6
 
 PODFILE CHECKSUM: f2396161f8bb6f265dbfae5c781fbfa893ae22d9
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1
