@@ -32,6 +32,12 @@ class UserViewController: UIViewController {
         }
     }
     
+    @IBAction func showScopes(_ sender: Any) {
+        Pluto.shared.getScopes { [weak self] in
+            self?.showAlert(title: "scopes", content: $0.description)
+        }
+    }
+    
     private func set(user: PlutoUser) {
         avatarImageView.kf.setImage(with: URL(string: user.avatar))
         emailLabel.text = user.mail
