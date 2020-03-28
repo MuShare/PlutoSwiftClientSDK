@@ -3,4 +3,5 @@ platform :ios, '11.0'
 
 target 'Pluto-Example' do
   pod 'PlutoSDK/Rx', :path => '../'
+  pod 'Kingfisher'
 end

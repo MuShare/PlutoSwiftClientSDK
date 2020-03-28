@@ -7,14 +7,17 @@
 //
 
 import PlutoSDK
+import Kingfisher
 
 class UserViewController: UIViewController {
+    
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Pluto.shared.myInfo(success: {
-            print($0)
+        Pluto.shared.myInfo(success: { [weak self] in
+            self?.set(user: $0)
         }, error: {
             print($0)
         })
@@ -23,7 +26,12 @@ class UserViewController: UIViewController {
     @IBAction func refresh(_ sender: Any) {
         Pluto.shared.getToken { [weak self] in
             self?.showAlert(title: "token", content: $0 ?? "")
+            
         }
+    }
+    
+    private func set(user: PlutoUser) {
+        avatarImageView.kf.setImage(with: URL(string: user.avatar))
     }
     
 }
