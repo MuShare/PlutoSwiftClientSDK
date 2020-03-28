@@ -83,4 +83,25 @@ extension Pluto {
         }
     }
     
+    public func getScopes(completion: @escaping ([String]) -> Void) {
+        getToken {
+            guard let jwt = $0 else {
+                completion([])
+                return
+            }
+            let parts = jwt.split(separator: ".").map(String.init)
+            guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
+                completion([])
+                return
+            }
+            
+            let user = JSON(parseJSON: restoreString)
+            guard let scopes = user["scopes"].array else {
+                completion([])
+                return
+            }
+            completion(scopes.compactMap { $0.string })
+        }
+    }
+    
 }
