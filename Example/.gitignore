@@ -1,3 +1,6 @@
+# idea
+.idea/
+
 # Xcode
 xcuserdata/
 *.moved-aside
