@@ -12,6 +12,8 @@ import Kingfisher
 class UserViewController: UIViewController {
     
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,8 @@ class UserViewController: UIViewController {
     
     private func set(user: PlutoUser) {
         avatarImageView.kf.setImage(with: URL(string: user.avatar))
+        emailLabel.text = user.mail
+        nameLabel.text = user.name
     }
     
 }

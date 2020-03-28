@@ -186,22 +186,43 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-gz-y1P">
+                                <rect key="frame" x="167" y="190" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7D-96-cJJ">
+                                <rect key="frame" x="166" y="219" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqu-ew-yj6">
+                                <rect key="frame" x="140" y="597" width="95" height="30"/>
+                                <state key="normal" title="Refresh token"/>
+                                <connections>
+                                    <action selector="refresh:" destination="PkW-NZ-hv0" eventType="touchUpInside" id="xBy-qd-DJS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CDx-vy-hRh" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="5YR-7T-YwG"/>
+                            <constraint firstItem="xCI-fA-ZZv" firstAttribute="top" secondItem="zqu-ew-yj6" secondAttribute="bottom" constant="20" id="Ikr-Nx-P2J"/>
+                            <constraint firstItem="zqu-ew-yj6" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="J4Z-WN-cCr"/>
+                            <constraint firstItem="Msv-gz-y1P" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="Zoy-zM-AUf"/>
+                            <constraint firstItem="K7D-96-cJJ" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="aM6-aQ-dXP"/>
                             <constraint firstItem="CDx-vy-hRh" firstAttribute="top" secondItem="sMq-pN-e1s" secondAttribute="bottom" constant="32" id="bfL-nj-xYJ"/>
+                            <constraint firstItem="Msv-gz-y1P" firstAttribute="top" secondItem="CDx-vy-hRh" secondAttribute="bottom" constant="22" id="hU8-pq-j1X"/>
+                            <constraint firstItem="K7D-96-cJJ" firstAttribute="top" secondItem="Msv-gz-y1P" secondAttribute="bottom" constant="8" id="rE9-9T-4rc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Pluto" id="Xyp-lr-N8S">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="mjd-Ai-ypw">
-                            <connections>
-                                <action selector="refresh:" destination="PkW-NZ-hv0" id="QBy-DW-IxO"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Pluto" id="Xyp-lr-N8S"/>
                     <connections>
                         <outlet property="avatarImageView" destination="CDx-vy-hRh" id="EdR-db-vGm"/>
+                        <outlet property="emailLabel" destination="Msv-gz-y1P" id="Dta-A2-bLX"/>
+                        <outlet property="nameLabel" destination="K7D-96-cJJ" id="TUg-6j-ov8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gR8-gi-uEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
