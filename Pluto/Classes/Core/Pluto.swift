@@ -90,6 +90,7 @@ final public class Pluto {
     
     public func observeState(observer: ((State) -> Void)?) {
         stateObserver = observer
+        stateObserver?(state)
     }
     
     public func currentState() -> Pluto.State {
