@@ -76,4 +76,5 @@ public enum PlutoError: Int, Error {
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
     case invalidJWTToekn = 3003
+    case avatarBase64GenerateError = 4001
 }

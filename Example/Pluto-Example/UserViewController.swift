@@ -93,31 +93,11 @@ extension UserViewController: UIImagePickerControllerDelegate {
             return
         }
         picker.dismiss(animated: true, completion: nil)
-        
-        /*
-        uploadButton.isEnabled = false
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
-        
-        timer = Timer.scheduledTimer(
-            timeInterval: 0.1,
-            target      : self,
-            selector    : #selector(updateUploadProgress),
-            userInfo    : nil,
-            repeats     : true)
-        
-        user.uploadAvatar(avatarImageView.image!) { (success) in
-            self.uploadButton.isEnabled = true
-            self.navigationItem.leftBarButtonItem?.isEnabled = true
-            self.timer?.invalidate()
-            self.timer = nil
-            if success {
-                self.uploadButton.setTitle(R.string.localizable.upload_profile_photo(), for: .normal)
-            }
-        }
- */
-        
-        Pluto.shared.uploadAvatar(image: image, success: {
-            
+
+        Pluto.shared.uploadAvatar(image: image, success: { [weak self] in
+            self?.avatarImageView.image = image
+        }, error: {
+            print("Error uploading avatar: \($0)")
         })
     }
     

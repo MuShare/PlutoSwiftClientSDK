@@ -30,7 +30,7 @@ extension Pluto {
     
     public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
         let requestUrl = url(from: "api/user/info/me")
-        return getHeaders {
+        getHeaders {
             AF.request(requestUrl, method: .get, headers: $0).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
@@ -56,11 +56,30 @@ extension Pluto {
         repeat {
             data = image.jpegData(compressionQuality: quality)
             quality /= 2
-        } while data?.count ?? Int.max < 100 * 1000
-        guard let imageData = data else {
+        } while (data?.count ?? Int.max > 40 * 1000) && quality > 0.001
+        guard let base64 = data?.base64EncodedString(options: .lineLength64Characters) else {
+            error?(PlutoError.avatarBase64GenerateError)
             return
         }
-        print(imageData.count)
+        let requestUrl = url(from: "api/user/info/me/update")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .put,
+                parameters: [
+                    "avatar": base64
+                ],
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    success()
+                } else {
+                    error?(response.errorCode())
+                }
+            }
+        }
     }
     
 }
