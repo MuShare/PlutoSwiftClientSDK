@@ -48,6 +48,19 @@ extension Pluto {
                 }
             }
         }
-   }
+    }
+    
+    public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        var quality: CGFloat = 1.0
+        var data: Data? = nil
+        repeat {
+            data = image.jpegData(compressionQuality: quality)
+            quality /= 2
+        } while data?.count ?? Int.max < 100 * 1000
+        guard let imageData = data else {
+            return
+        }
+        print(imageData.count)
+    }
     
 }

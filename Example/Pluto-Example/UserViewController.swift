@@ -89,7 +89,9 @@ class UserViewController: UIViewController {
 extension UserViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        avatarImageView.image = info[.editedImage] as? UIImage
+        guard let image = info[.editedImage] as? UIImage else {
+            return
+        }
         picker.dismiss(animated: true, completion: nil)
         
         /*
@@ -113,6 +115,10 @@ extension UserViewController: UIImagePickerControllerDelegate {
             }
         }
  */
+        
+        Pluto.shared.uploadAvatar(image: image, success: {
+            
+        })
     }
     
 }
