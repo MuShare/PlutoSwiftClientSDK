@@ -1,6 +1,6 @@
  # Pluto Swift Client SDK
 
-[![CI Status](https://img.shields.io/travis/MuShare/PlutoSwiftClientSDK.svg?style=flat)](https://travis-ci.org/MuShare/PlutoSwiftClientSDK)
+[![CI Status](https://github.com/MuShare/PlutoSwiftClientSDK/workflows/build_check/badge.svg?branch=master)
 [![Version](https://img.shields.io/cocoapods/v/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
 [![License](https://img.shields.io/cocoapods/l/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
 [![Platform](https://img.shields.io/cocoapods/p/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
