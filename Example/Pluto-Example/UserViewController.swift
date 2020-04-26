@@ -15,6 +15,16 @@ class UserViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    private lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.navigationBar.tintColor = .white
+        imagePickerController.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white
+        ]
+        return imagePickerController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,4 +54,67 @@ class UserViewController: UIViewController {
         nameLabel.text = user.name
     }
     
+    @IBAction func uploadAvatar(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Update Avatar",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.imagePickerController.sourceType = .camera
+                self.imagePickerController.cameraCaptureMode = .photo
+                self.imagePickerController.cameraDevice = .front
+                self.imagePickerController.allowsEditing = true
+            }
+            self.present(self.imagePickerController, animated: true)
+        }
+        let choosePhoto = UIAlertAction(title: "Select from Library", style: .default) { action in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.imagePickerController.allowsEditing = true
+            self.present(self.imagePickerController, animated: true)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(takePhoto)
+        alertController.addAction(choosePhoto)
+        alertController.addAction(cancel)
+        alertController.popoverPresentationController?.sourceView = avatarImageView
+        alertController.popoverPresentationController?.sourceRect = avatarImageView.bounds
+        present(alertController, animated: true)
+    }
+    
 }
+
+
+extension UserViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        avatarImageView.image = info[.editedImage] as? UIImage
+        picker.dismiss(animated: true, completion: nil)
+        
+        /*
+        uploadButton.isEnabled = false
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target      : self,
+            selector    : #selector(updateUploadProgress),
+            userInfo    : nil,
+            repeats     : true)
+        
+        user.uploadAvatar(avatarImageView.image!) { (success) in
+            self.uploadButton.isEnabled = true
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.timer?.invalidate()
+            self.timer = nil
+            if success {
+                self.uploadButton.setTitle(R.string.localizable.upload_profile_photo(), for: .normal)
+            }
+        }
+ */
+    }
+    
+}
+
+extension UserViewController: UINavigationControllerDelegate {}
