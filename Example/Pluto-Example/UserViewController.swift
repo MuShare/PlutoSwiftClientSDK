@@ -15,13 +15,23 @@ class UserViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    private lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.navigationBar.tintColor = .white
+        imagePickerController.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white
+        ]
+        return imagePickerController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Pluto.shared.myInfo(success: { [weak self] in
             self?.set(user: $0)
         }, error: {
-            print($0)
+            print("Error loading user info: \($0)")
         })
     }
     
@@ -44,4 +54,53 @@ class UserViewController: UIViewController {
         nameLabel.text = user.name
     }
     
+    @IBAction func uploadAvatar(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Update Avatar",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.imagePickerController.sourceType = .camera
+                self.imagePickerController.cameraCaptureMode = .photo
+                self.imagePickerController.cameraDevice = .front
+                self.imagePickerController.allowsEditing = true
+            }
+            self.present(self.imagePickerController, animated: true)
+        }
+        let choosePhoto = UIAlertAction(title: "Select from Library", style: .default) { action in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.imagePickerController.allowsEditing = true
+            self.present(self.imagePickerController, animated: true)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(takePhoto)
+        alertController.addAction(choosePhoto)
+        alertController.addAction(cancel)
+        alertController.popoverPresentationController?.sourceView = avatarImageView
+        alertController.popoverPresentationController?.sourceRect = avatarImageView.bounds
+        present(alertController, animated: true)
+    }
+    
 }
+
+
+extension UserViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else {
+            return
+        }
+        picker.dismiss(animated: true, completion: nil)
+
+        Pluto.shared.uploadAvatar(image: image, success: { [weak self] in
+            self?.avatarImageView.image = image
+        }, error: {
+            print("Error uploading avatar: \($0)")
+        })
+    }
+    
+}
+
+extension UserViewController: UINavigationControllerDelegate {}

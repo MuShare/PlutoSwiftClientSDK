@@ -30,7 +30,7 @@ extension Pluto {
     
     public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
         let requestUrl = url(from: "api/user/info/me")
-        return getHeaders {
+        getHeaders {
             AF.request(requestUrl, method: .get, headers: $0).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
@@ -48,6 +48,32 @@ extension Pluto {
                 }
             }
         }
-   }
+    }
+    
+    public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        guard let base64 = image.base64() else {
+            error?(PlutoError.avatarBase64GenerateError)
+            return
+        }
+        let requestUrl = url(from: "api/user/info/me/update")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .put,
+                parameters: [
+                    "avatar": base64
+                ],
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    success()
+                } else {
+                    error?(response.errorCode())
+                }
+            }
+        }
+    }
     
 }

@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -186,6 +186,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXJ-5s-9Xt">
+                                <rect key="frame" x="147.5" y="88" width="80" height="80"/>
+                                <connections>
+                                    <action selector="uploadAvatar:" destination="PkW-NZ-hv0" eventType="touchUpInside" id="UNk-lc-64g"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-gz-y1P">
                                 <rect key="frame" x="167" y="190" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -217,13 +223,17 @@
                         <constraints>
                             <constraint firstItem="CDx-vy-hRh" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="5YR-7T-YwG"/>
                             <constraint firstItem="zqu-ew-yj6" firstAttribute="top" secondItem="eZk-UD-zl9" secondAttribute="bottom" constant="8" id="G2a-vJ-ACb"/>
+                            <constraint firstItem="OXJ-5s-9Xt" firstAttribute="bottom" secondItem="CDx-vy-hRh" secondAttribute="bottom" id="Hda-sc-K8H"/>
                             <constraint firstItem="xCI-fA-ZZv" firstAttribute="top" secondItem="zqu-ew-yj6" secondAttribute="bottom" constant="20" id="Ikr-Nx-P2J"/>
                             <constraint firstItem="zqu-ew-yj6" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="J4Z-WN-cCr"/>
+                            <constraint firstItem="OXJ-5s-9Xt" firstAttribute="leading" secondItem="CDx-vy-hRh" secondAttribute="leading" id="YNI-3g-qwH"/>
                             <constraint firstItem="Msv-gz-y1P" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="Zoy-zM-AUf"/>
                             <constraint firstItem="K7D-96-cJJ" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="aM6-aQ-dXP"/>
                             <constraint firstItem="CDx-vy-hRh" firstAttribute="top" secondItem="sMq-pN-e1s" secondAttribute="bottom" constant="32" id="bfL-nj-xYJ"/>
+                            <constraint firstItem="OXJ-5s-9Xt" firstAttribute="trailing" secondItem="CDx-vy-hRh" secondAttribute="trailing" id="f0X-TQ-uIe"/>
                             <constraint firstItem="Msv-gz-y1P" firstAttribute="top" secondItem="CDx-vy-hRh" secondAttribute="bottom" constant="22" id="hU8-pq-j1X"/>
                             <constraint firstItem="K7D-96-cJJ" firstAttribute="top" secondItem="Msv-gz-y1P" secondAttribute="bottom" constant="8" id="rE9-9T-4rc"/>
+                            <constraint firstItem="OXJ-5s-9Xt" firstAttribute="top" secondItem="CDx-vy-hRh" secondAttribute="top" id="xRc-Ra-YPe"/>
                             <constraint firstItem="eZk-UD-zl9" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="yoB-Qr-DBO"/>
                         </constraints>
                     </view>
@@ -236,7 +246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gR8-gi-uEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="-488"/>
+            <point key="canvasLocation" x="1764" y="-488.00599700149928"/>
         </scene>
     </scenes>
 </document>
