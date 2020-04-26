@@ -83,6 +83,31 @@ class UserViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    @IBAction func updateName(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Update user name",
+            message: nil,
+            preferredStyle: .alert
+        )
+        alertController.addTextField {
+            $0.textAlignment = .center
+        }
+        let addAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] _ in
+            guard let name = alertController.textFields?[0].text else {
+                return
+            }
+            Pluto.shared.updateName(name: name, success: { [weak self] in
+                self?.nameLabel.text = name
+            }, error: {
+                print("Error updating user name: \($0)")
+            })
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(addAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    
 }
 
 
