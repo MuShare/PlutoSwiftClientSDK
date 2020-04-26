@@ -98,8 +98,13 @@ class UserViewController: UIViewController {
             }
             Pluto.shared.updateName(name: name, success: { [weak self] in
                 self?.nameLabel.text = name
-            }, error: {
-                print("Error updating user name: \($0)")
+            }, error: { [weak self] in
+                switch $0 {
+                case .userNameExist:
+                    self?.showAlert(title: "Error", content: "User name already exists")
+                default:
+                    print("Error updating user name: \($0)")
+                }
             })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
