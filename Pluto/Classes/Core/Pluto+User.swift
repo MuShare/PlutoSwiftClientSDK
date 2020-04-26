@@ -51,13 +51,7 @@ extension Pluto {
     }
     
     public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        var quality: CGFloat = 1.0
-        var data: Data? = nil
-        repeat {
-            data = image.jpegData(compressionQuality: quality)
-            quality /= 2
-        } while (data?.count ?? Int.max > 40 * 1000) && quality > 0.001
-        guard let base64 = data?.base64EncodedString(options: .lineLength64Characters) else {
+        guard let base64 = image.base64() else {
             error?(PlutoError.avatarBase64GenerateError)
             return
         }

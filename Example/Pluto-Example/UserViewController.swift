@@ -31,7 +31,7 @@ class UserViewController: UIViewController {
         Pluto.shared.myInfo(success: { [weak self] in
             self?.set(user: $0)
         }, error: {
-            print($0)
+            print("Error loading user info: \($0)")
         })
     }
     

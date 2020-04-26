@@ -33,7 +33,10 @@ struct PlutoResponse {
     init(_ response: AFDataResponse<Any>) {
         if let value = response.value as? [String: Any] {
             data = value
-            print(value)
+            #if DEBUG
+            print("\(Date()) Response for \(response.request?.url?.absoluteString ?? "")\n \(value)")
+            #endif
+            
         }
     }
     
