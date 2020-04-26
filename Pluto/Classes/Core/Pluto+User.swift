@@ -50,6 +50,28 @@ extension Pluto {
         }
     }
     
+    public func updateName(name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        let requestUrl = url(from: "api/user/info/me/update")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .put,
+                parameters: [
+                    "name": name
+                ],
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    success()
+                } else {
+                    error?(response.errorCode())
+                }
+            }
+        }
+    }
+    
     public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         guard let base64 = image.base64() else {
             error?(PlutoError.avatarBase64GenerateError)
