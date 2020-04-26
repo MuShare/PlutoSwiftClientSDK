@@ -1,4 +1,4 @@
- # Pluto-Swift-SDK
+ # Pluto Swift Client SDK
 
 [![CI Status](https://img.shields.io/travis/MuShare/PlutoSwiftClientSDK.svg?style=flat)](https://travis-ci.org/MuShare/PlutoSwiftClientSDK)
 [![Version](https://img.shields.io/cocoapods/v/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
@@ -39,9 +39,11 @@ After signing in, get token or the header with token with the following methods
 - `Pluto.shared.getToken()`
 - `Pluto.shared.getHeaders()`
 
-Get user information with 
+Get and update user information with 
 
 - `Pluto.shared.myInfo()`
+- `Pluto.shared.updateName()`
+- `Pluto.shared.uploadAvatar()`
 
 Get scopes from jwt token with
 
@@ -53,4 +55,4 @@ lm2343635, lm2343635@126.com
 
 ## License
 
-MuShare-Login-Swift-SDK is available under the MIT license. See the LICENSE file for more info.
+ Pluto Swift Client SDK is available under the MIT license. See the LICENSE file for more info.
