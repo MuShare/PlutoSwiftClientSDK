@@ -106,8 +106,8 @@ class DefaultsManager {
         
         let user = JSON(parseJSON: restoreString)
         guard
-            let userId = user["userId"].int,
-            let expire = user["expire_time"].int
+            let userId = user["sub"].int,
+            let expire = user["exp"].int
         else {
             return false
         }

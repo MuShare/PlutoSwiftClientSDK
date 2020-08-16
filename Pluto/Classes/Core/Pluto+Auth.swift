@@ -53,8 +53,7 @@ extension Pluto {
             method: .post,
             parameters: [
                 "refresh_token": refreshToken,
-                "user_id": userId,
-                "scopes": DefaultsManager.shared.jwt?.scopes ?? []
+                "user_id": userId
             ],
             encoding: JSONEncoding.default
         ).responseJSON {

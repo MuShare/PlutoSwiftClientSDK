@@ -72,7 +72,7 @@ extension Pluto {
             url(from: "/v1/user/login/account"),
             method: .post,
             parameters: [
-                "mail": address,
+                "account": address,
                 "password": password,
                 "device_id": deviceId,
                 "app_id": appId
@@ -157,13 +157,13 @@ extension Pluto {
             let body = response.getBody()
             guard
                 let refreshToken = body["refresh_token"].string,
-                let jwt = body["jwt"].string
+                let accessToken = body["access_token"].string
             else {
                 error?(PlutoError.parseError)
                 return
             }
             DefaultsManager.shared.refreshToken = refreshToken
-            guard DefaultsManager.shared.updateJwt(jwt) else {
+            guard DefaultsManager.shared.updateJwt(accessToken) else {
                 error?(PlutoError.parseError)
                 return
             }
