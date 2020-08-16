@@ -72,7 +72,10 @@ final public class Pluto {
     private init() {}
    
     func url(from relativeUrl: String) -> String {
-        return server + "/" + relativeUrl
+        if server.last == "/" {
+            return String(server.dropLast()) + relativeUrl
+        }
+        return server + relativeUrl
     }
     
     public func setup(server: String, appId: String) {

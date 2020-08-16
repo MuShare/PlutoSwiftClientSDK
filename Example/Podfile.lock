@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (5.1.0)
-  - Kingfisher (5.13.4):
-    - Kingfisher/Core (= 5.13.4)
-  - Kingfisher/Core (5.13.4)
-  - PlutoSDK/Core (0.3.1):
+  - Alamofire (5.2.2)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
+  - PlutoSDK/Core (0.4):
     - Alamofire (~> 5)
     - SwiftyJSON (~> 5)
     - SwiftyUserDefaults (~> 5)
-  - PlutoSDK/Rx (0.3.1):
+  - PlutoSDK/Rx (0.4):
     - PlutoSDK/Core (~> 0)
     - RxCocoa (~> 5)
   - RxCocoa (5.1.1):
@@ -38,9 +38,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
-  Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
-  PlutoSDK: ed23d6bcfe0eb3ef9ef78a8fbf35d3efed25c221
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  PlutoSDK: aa31655795c542b40e6de49be0a8bc9a9733e687
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -49,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 060a383e29eaf364f3e242459927134ee8cc5dce
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

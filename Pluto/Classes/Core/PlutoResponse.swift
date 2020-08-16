@@ -34,7 +34,9 @@ struct PlutoResponse {
         if let value = response.value as? [String: Any] {
             data = value
             #if DEBUG
-            print("\(Date()) Response for \(response.request?.url?.absoluteString ?? "")\n \(value)")
+            let url = response.request?.url?.absoluteString ?? ""
+            let requestBody = String(data: response.request?.httpBody ?? Data(), encoding: .utf8) ?? ""
+            print("\(Date()) Response for \(url)\n requestBody: \(requestBody)\n response: \(value)")
             #endif
             
         }

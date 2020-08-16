@@ -23,16 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import SwiftyJSON
+
 extension String {
 
-    func base64Encoded() -> String? {
+    var base64Encoded: String? {
         if let data = self.data(using: .utf8) {
             return data.base64EncodedString()
         }
         return nil
     }
     
-    func base64Decoded() -> String? {
+    var base64Decoded: String? {
         if let _ = self.range(of: ":")?.lowerBound {
             return self
         }
@@ -49,5 +51,18 @@ extension String {
         }
         return decodedString as String
     }
+    
+    var scopes: [String] {
+        let parts = split(separator: ".").map(String.init)
+        guard parts.count == 3, let restoreString = parts[1].base64Decoded else {
+            return []
+        }
+        
+        let user = JSON(parseJSON: restoreString)
+        guard let scopes = user["scopes"].array else {
+            return []
+        }
+        return scopes.compactMap { $0.string }
+    }
+    
 }
-

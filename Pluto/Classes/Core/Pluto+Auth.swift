@@ -49,13 +49,11 @@ extension Pluto {
             return
         }
         AF.request(
-            url(from: "api/auth/refresh"),
+            url(from: "/v1/token/refresh"),
             method: .post,
             parameters: [
                 "refresh_token": refreshToken,
-                "user_id": userId,
-                "device_id": deviceId,
-                "app_id": appId
+                "user_id": userId
             ],
             encoding: JSONEncoding.default
         ).responseJSON {
@@ -89,18 +87,7 @@ extension Pluto {
                 completion([])
                 return
             }
-            let parts = jwt.split(separator: ".").map(String.init)
-            guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
-                completion([])
-                return
-            }
-            
-            let user = JSON(parseJSON: restoreString)
-            guard let scopes = user["scopes"].array else {
-                completion([])
-                return
-            }
-            completion(scopes.compactMap { $0.string })
+            completion(jwt.scopes)
         }
     }
     
