@@ -1,6 +1,6 @@
  # Pluto Swift Client SDK
 
-[![CI Status](https://github.com/MuShare/PlutoSwiftClientSDK/workflows/build_check/badge.svg?branch=master)
+![CI Status](https://github.com/MuShare/PlutoSwiftClientSDK/workflows/build_check/badge.svg?branch=master)
 [![Version](https://img.shields.io/cocoapods/v/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
 [![License](https://img.shields.io/cocoapods/l/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
 [![Platform](https://img.shields.io/cocoapods/p/PlutoSDK.svg?style=flat)](https://cocoapods.org/pods/PlutoSDK)
@@ -28,7 +28,7 @@ Implement signing in and signing up with the following methods
 
 - `Pluto.shared.registerByEmaili()`
 - `Pluto.shared.resendValidationEmail()`
-- `Pluto.shared.loginWithEmail()`
+- `Pluto.shared.loginWithAccount()`
 - `Pluto.shared.loginWithGoogle()`
 - `Pluto.shared.loginWithApple()`
 - `Pluto.shared.resetPassword()`
