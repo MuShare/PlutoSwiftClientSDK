@@ -67,12 +67,12 @@ extension Pluto {
         }
     }
     
-    public func loginWithEmail(address: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+    public func loginWithAccount(account: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/login/account"),
             method: .post,
             parameters: [
-                "account": address,
+                "account": account,
                 "password": password,
                 "device_id": deviceId,
                 "app_id": appId

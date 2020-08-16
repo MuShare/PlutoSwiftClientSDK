@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         else {
             return
         }
-        Pluto.shared.loginWithEmail(address: address, password: password, error: { [weak self] error in
+        Pluto.shared.loginWithAccount(account: address, password: password, error: { [weak self] error in
             self?.showAlert(title: "Error", content: error.localizedDescription)
         })
     }
