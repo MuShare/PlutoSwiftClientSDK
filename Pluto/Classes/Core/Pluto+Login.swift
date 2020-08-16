@@ -29,7 +29,7 @@ extension Pluto {
 
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/register"),
+            url(from: "/v1/user/register"),
             method: .post,
             parameters: [
                 "mail": address,
@@ -50,7 +50,7 @@ extension Pluto {
     
     public func resendValidationEmail(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/register/verify/mail"),
+            url(from: "/v1/user/register/verify/mail"),
             method: .post,
             parameters: [
                 "mail": address
@@ -69,15 +69,13 @@ extension Pluto {
     
     public func loginWithEmail(address: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/login"),
+            url(from: "/v1/user/login/account"),
             method: .post,
             parameters: [
                 "mail": address,
                 "password": password,
                 "device_id": deviceId,
                 "app_id": appId
-//                "version": UIDevice.current.systemVersion,
-//                "language": Bundle.main.preferredLocalizations[0].components(separatedBy: "-")[0]
             ],
             encoding: JSONEncoding.default,
             headers: commonHeaders
@@ -91,7 +89,7 @@ extension Pluto {
     }
     public func loginWithGoogle(idToken: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/login/google/mobile"),
+            url(from: "/v1/user/login/google/mobile"),
             method: .post,
             parameters: [
                 "id_token": idToken,
@@ -111,7 +109,7 @@ extension Pluto {
 
     public func loginWithApple(authCode: String, name: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/login/apple/mobile"),
+            url(from: "/v1/user/login/apple/mobile"),
             method: .post,
             parameters: [
                 "code": authCode,
@@ -132,7 +130,7 @@ extension Pluto {
     
     public func resetPassword(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
-            url(from: "api/user/password/reset/mail"),
+            url(from: "/v1/user/password/reset/mail"),
             method: .post,
             parameters: [
                 "mail": address
@@ -169,7 +167,7 @@ extension Pluto {
                 error?(PlutoError.parseError)
                 return
             }
-            self.state = .signin
+            state = .signin
             success?()
         } else {
             error?(response.errorCode())

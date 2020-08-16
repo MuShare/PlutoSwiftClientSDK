@@ -100,7 +100,7 @@ class DefaultsManager {
     
     func updateJwt(_ jwt: String) -> Bool {
         let parts = jwt.split(separator: ".").map(String.init)
-        guard parts.count == 3, let restoreString = parts[1].base64Decoded() else {
+        guard parts.count == 3, let restoreString = parts[1].base64Decoded else {
             return false
         }
         

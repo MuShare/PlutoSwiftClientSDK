@@ -29,7 +29,7 @@ import SwiftyJSON
 extension Pluto {
     
     public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "api/user/info/me")
+        let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(requestUrl, method: .get, headers: $0).responseJSON {
                 let response = PlutoResponse($0)
@@ -51,7 +51,7 @@ extension Pluto {
     }
     
     public func updateName(name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "api/user/info/me/update")
+        let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(
                 requestUrl,
@@ -77,7 +77,7 @@ extension Pluto {
             error?(PlutoError.avatarBase64GenerateError)
             return
         }
-        let requestUrl = url(from: "api/user/info/me/update")
+        let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(
                 requestUrl,
