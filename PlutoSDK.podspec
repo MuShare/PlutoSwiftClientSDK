@@ -27,7 +27,7 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
   s.author           = { 'lm2343635' => 'lm2343635@126.com' }
   s.source           = { :git => 'https://github.com/MuShare/Pluto-Swift-SDK.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
   s.swift_version = '5.0'
 
   s.default_subspec = 'Core'
