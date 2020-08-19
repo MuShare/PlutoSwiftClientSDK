@@ -192,18 +192,6 @@
                                     <action selector="uploadAvatar:" destination="PkW-NZ-hv0" eventType="touchUpInside" id="UNk-lc-64g"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-gz-y1P">
-                                <rect key="frame" x="167" y="190" width="41" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7D-96-cJJ">
-                                <rect key="frame" x="166" y="219" width="43" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqu-ew-yj6">
                                 <rect key="frame" x="140" y="597" width="95" height="30"/>
                                 <state key="normal" title="Refresh token"/>
@@ -225,6 +213,12 @@
                                     <action selector="updateName:" destination="PkW-NZ-hv0" eventType="touchUpInside" id="M4z-JD-0RG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7D-96-cJJ">
+                                <rect key="frame" x="166" y="187" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -233,14 +227,12 @@
                             <constraint firstItem="OXJ-5s-9Xt" firstAttribute="bottom" secondItem="CDx-vy-hRh" secondAttribute="bottom" id="Hda-sc-K8H"/>
                             <constraint firstItem="xCI-fA-ZZv" firstAttribute="top" secondItem="zqu-ew-yj6" secondAttribute="bottom" constant="20" id="Ikr-Nx-P2J"/>
                             <constraint firstItem="zqu-ew-yj6" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="J4Z-WN-cCr"/>
+                            <constraint firstItem="K7D-96-cJJ" firstAttribute="top" secondItem="OXJ-5s-9Xt" secondAttribute="bottom" constant="19" id="U0R-im-W4g"/>
                             <constraint firstItem="OXJ-5s-9Xt" firstAttribute="leading" secondItem="CDx-vy-hRh" secondAttribute="leading" id="YNI-3g-qwH"/>
-                            <constraint firstItem="Msv-gz-y1P" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="Zoy-zM-AUf"/>
                             <constraint firstItem="K7D-96-cJJ" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="aM6-aQ-dXP"/>
                             <constraint firstItem="CDx-vy-hRh" firstAttribute="top" secondItem="sMq-pN-e1s" secondAttribute="bottom" constant="32" id="bfL-nj-xYJ"/>
                             <constraint firstItem="eZk-UD-zl9" firstAttribute="top" secondItem="0J1-Sy-deq" secondAttribute="bottom" constant="8" id="cVK-1J-0zZ"/>
                             <constraint firstItem="OXJ-5s-9Xt" firstAttribute="trailing" secondItem="CDx-vy-hRh" secondAttribute="trailing" id="f0X-TQ-uIe"/>
-                            <constraint firstItem="Msv-gz-y1P" firstAttribute="top" secondItem="CDx-vy-hRh" secondAttribute="bottom" constant="22" id="hU8-pq-j1X"/>
-                            <constraint firstItem="K7D-96-cJJ" firstAttribute="top" secondItem="Msv-gz-y1P" secondAttribute="bottom" constant="8" id="rE9-9T-4rc"/>
                             <constraint firstItem="0J1-Sy-deq" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="s2h-0V-dd2"/>
                             <constraint firstItem="OXJ-5s-9Xt" firstAttribute="top" secondItem="CDx-vy-hRh" secondAttribute="top" id="xRc-Ra-YPe"/>
                             <constraint firstItem="eZk-UD-zl9" firstAttribute="centerX" secondItem="uSB-pY-S7p" secondAttribute="centerX" id="yoB-Qr-DBO"/>
@@ -249,7 +241,6 @@
                     <navigationItem key="navigationItem" title="Pluto" id="Xyp-lr-N8S"/>
                     <connections>
                         <outlet property="avatarImageView" destination="CDx-vy-hRh" id="EdR-db-vGm"/>
-                        <outlet property="emailLabel" destination="Msv-gz-y1P" id="Dta-A2-bLX"/>
                         <outlet property="nameLabel" destination="K7D-96-cJJ" id="TUg-6j-ov8"/>
                     </connections>
                 </viewController>

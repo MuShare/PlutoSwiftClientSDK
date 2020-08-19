@@ -12,7 +12,6 @@ import Kingfisher
 class UserViewController: UIViewController {
     
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
     private lazy var imagePickerController: UIImagePickerController = {
@@ -20,7 +19,7 @@ class UserViewController: UIViewController {
         imagePickerController.delegate = self
         imagePickerController.navigationBar.tintColor = .white
         imagePickerController.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white
+            .foregroundColor : UIColor.white
         ]
         return imagePickerController
     }()
@@ -50,7 +49,6 @@ class UserViewController: UIViewController {
     
     private func set(user: PlutoUser) {
         avatarImageView.kf.setImage(with: URL(string: user.avatar))
-        emailLabel.text = user.mail
         nameLabel.text = user.name
     }
     

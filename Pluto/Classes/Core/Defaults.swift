@@ -31,7 +31,6 @@ extension DefaultsKeys {
     var refreshToken: DefaultsKey<String?> { .init("org.mushare.pluto.refreshToken") }
     var expire: DefaultsKey<Int> { .init("org.mushare.pluto.exipre", defaultValue: 0) }
     var userId: DefaultsKey<Int?> { .init("org.mushare.pluto.userId") }
-    var mail: DefaultsKey<String?> { .init("org.mushare.pluto.mail") }
     var name: DefaultsKey<String?> { .init("org.mushare.pluto.name") }
     var avatar: DefaultsKey<String?> { .init("org.mushare.pluto.avatar") }
 }
@@ -82,17 +81,15 @@ class DefaultsManager {
         get {
             guard
                 let userId = Defaults.userId,
-                let mail = Defaults.mail,
                 let name = Defaults.name,
                 let avatar = Defaults.avatar
             else {
                 return nil
             }
-            return PlutoUser(id: userId, mail: mail, avatar: avatar, name: name)
+            return PlutoUser(id: userId, avatar: avatar, name: name)
         }
         set {
             Defaults.userId = newValue?.id
-            Defaults.mail = newValue?.mail
             Defaults.name = newValue?.name
             Defaults.avatar = newValue?.avatar
         }

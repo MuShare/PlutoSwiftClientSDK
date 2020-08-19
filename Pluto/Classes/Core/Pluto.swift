@@ -28,7 +28,6 @@ import SwiftyJSON
 
 public struct PlutoUser {
     public let id: Int
-    public let mail: String
     public let avatar: String
     public let name: String
 }

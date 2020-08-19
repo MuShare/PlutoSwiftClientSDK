@@ -37,7 +37,6 @@ extension Pluto {
                     let result = response.getBody()
                     let user = PlutoUser(
                         id: result["id"].intValue,
-                        mail: result["mail"].stringValue,
                         avatar: result["avatar"].stringValue,
                         name: result["name"].stringValue
                     )
