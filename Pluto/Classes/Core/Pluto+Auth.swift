@@ -28,9 +28,10 @@ import SwiftyJSON
 
 extension Pluto {
 
-    public func getToken(completion: @escaping (String?) -> Void) {
+    public func getToken(isForceRefresh: Bool = false, completion: @escaping (String?) -> Void) {
         let expire = DefaultsManager.shared.expire
         guard
+            !isForceRefresh,
             let jwt = DefaultsManager.shared.jwt,
             expire - Int(Date().timeIntervalSince1970) > 5 * 60
         else {
@@ -41,10 +42,7 @@ extension Pluto {
     }
     
     func refreshToken(completion: @escaping (String?) -> Void) {
-        guard
-            let userId = DefaultsManager.shared.userId,
-            let refreshToken = DefaultsManager.shared.refreshToken
-        else {
+        guard let refreshToken = DefaultsManager.shared.refreshToken else {
             completion(nil)
             return
         }
@@ -53,17 +51,22 @@ extension Pluto {
             method: .post,
             parameters: [
                 "refresh_token": refreshToken,
-                "user_id": userId
+                "app_id": appId
             ],
             encoding: JSONEncoding.default
         ).responseJSON {
             let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
-                guard let jwt = body["jwt"].string, DefaultsManager.shared.updateJwt(jwt) else {
+                guard
+                    let jwt = body["access_token"].string,
+                    DefaultsManager.shared.updateJwt(jwt),
+                    let refreshToken = body["refresh_token"].string
+                else {
                     completion(nil)
                     return
                 }
+                DefaultsManager.shared.refreshToken = refreshToken
                 completion(jwt)
             }
         }

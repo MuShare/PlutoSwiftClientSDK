@@ -42,38 +42,38 @@ class DefaultsManager {
     private init() {}
     
     var jwt: String? {
+        get {
+            Defaults.jwt
+        }
         set {
             Defaults.jwt = newValue
-        }
-        get {
-            return Defaults.jwt
         }
     }
     
     var refreshToken: String? {
+        get {
+            Defaults.refreshToken
+        }
         set {
             Defaults.refreshToken = newValue
-        }
-        get {
-            return Defaults.refreshToken
         }
     }
     
     var expire: Int {
+        get {
+            Defaults.expire
+        }
         set {
             Defaults.expire = newValue
-        }
-        get {
-            return Defaults.expire
         }
     }
     
     var userId: Int? {
+        get {
+            Defaults.userId
+        }
         set {
             Defaults.userId = newValue
-        }
-        get {
-            return Defaults.userId
         }
     }
 
