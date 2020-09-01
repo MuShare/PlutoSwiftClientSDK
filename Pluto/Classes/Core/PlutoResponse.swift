@@ -78,6 +78,7 @@ public enum PlutoError: Int, Error {
     case mailIsNotExsit = 2002
     case mailIsNotVerified = 2003
     case mailAlreadyVerified = 2004
+    case usernameNotExsit = 2005
     case userNameExist = 2006
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
