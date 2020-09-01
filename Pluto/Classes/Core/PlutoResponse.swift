@@ -74,11 +74,11 @@ public enum PlutoError: Int, Error {
     case badRequest = -99998
     case parseError = -99997
     case notSignin = 1001
-    case mailIsAlreadyRegister = 2001
-    case mailIsNotExsit = 2002
-    case mailIsNotVerified = 2003
+    case mailAlreadyRegister = 2001
+    case mailNotExsit = 2002
+    case mailNotVerified = 2003
     case mailAlreadyVerified = 2004
-    case usernameNotExsit = 2005
+    case userNameNotExsit = 2005
     case userNameExist = 2006
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
