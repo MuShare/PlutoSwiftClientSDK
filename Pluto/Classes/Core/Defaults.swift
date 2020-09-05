@@ -89,7 +89,7 @@ class DefaultsManager {
         guard let jsonString = infoJSONString else {
             return nil
         }
-        let info = JSON(jsonString)
+        let info = JSON(parseJSON: jsonString)
         return PlutoUser(
             id: info["sub"].intValue,
             avatar: info["avatar"].stringValue,

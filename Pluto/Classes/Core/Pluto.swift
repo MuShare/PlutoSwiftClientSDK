@@ -37,6 +37,7 @@ public struct PlutoUser {
         let mail: String?
     }
 }
+
 final public class Pluto {
     
     public typealias ErrorCompletion = (PlutoError) -> Void
