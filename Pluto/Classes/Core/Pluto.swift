@@ -33,8 +33,20 @@ public struct PlutoUser {
     public let bindings: [Binding]
     
     public struct Binding {
-        let loginType: Pluto.LoginType
-        let mail: String?
+        public let loginType: Pluto.LoginType
+        public let mail: String?
+    }
+    
+    public var google: Binding? {
+        bindings.first { $0.loginType == .google }
+    }
+    
+    public var mail: Binding? {
+        bindings.first { $0.loginType == .mail }
+    }
+    
+    public var apple: Binding? {
+        bindings.first { $0.loginType == .apple }
     }
 }
 
@@ -75,7 +87,7 @@ final public class Pluto {
     let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     
     private init() {}
-   
+    
     func url(from relativeUrl: String) -> String {
         if server.last == "/" {
             return String(server.dropLast()) + relativeUrl
@@ -104,7 +116,7 @@ final public class Pluto {
     public func currentState() -> Pluto.State {
         return state
     }
-
+    
 }
 
 extension Pluto {
