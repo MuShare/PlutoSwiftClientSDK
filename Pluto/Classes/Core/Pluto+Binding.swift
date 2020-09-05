@@ -27,30 +27,31 @@ import Alamofire
 
 extension Pluto {
     
-    public enum BindingType {
-        case mail(mail: String)
-        case apple(code: String)
-        case google(idToken: String)
+    public enum LoginType {
+        case mail
+        case apple
+        case google
+        
+        var identifier: String {
+            switch self {
+            case .mail: return "mail"
+            case .apple: return "apple"
+            case .google: return "google"
+            }
+        }
     }
     
-    public func binding(type: BindingType) {
-        let parameters: Parameters
+    public func binding(type: LoginType, authString: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        var parameters = [
+            "type": type.identifier
+        ]
         switch type {
-        case .mail(let mail):
-            parameters = [
-                "type": "mail",
-                "mail": mail
-            ]
-        case .apple(let code):
-            parameters = [
-                "type": "apple",
-                "mail": code
-            ]
-        case .google(let idToken):
-            parameters = [
-                "type": "google",
-                "mail": idToken
-            ]
+        case .mail:
+            parameters["mail"] = authString
+        case .apple:
+            parameters["code"] = authString
+        case .google:
+            parameters["id_token"] = authString
         }
         let requestUrl = url(from: "/v1/user/binding")
         getHeaders {
@@ -63,9 +64,31 @@ extension Pluto {
             ).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
-                    
+                    success?()
                 } else {
-                    
+                    error?(response.errorCode())
+                }
+            }
+        }
+    }
+    
+    public func unbinding(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        let requestUrl = url(from: "/v1/user/unbinding")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .post,
+                parameters: [
+                    "type": type.identifier
+                ],
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    success?()
+                } else {
+                    error?(response.errorCode())
                 }
             }
         }
