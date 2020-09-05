@@ -30,8 +30,13 @@ public struct PlutoUser {
     public let id: Int
     public let avatar: String
     public let name: String
+    public let bindings: [Binding]
+    
+    public struct Binding {
+        let loginType: Pluto.LoginType
+        let mail: String?
+    }
 }
-
 final public class Pluto {
     
     public typealias ErrorCompletion = (PlutoError) -> Void
@@ -99,4 +104,20 @@ final public class Pluto {
         return state
     }
 
+}
+
+extension Pluto {
+    public enum LoginType: String {
+        case mail
+        case apple
+        case google
+        
+        var identifier: String {
+            rawValue
+        }
+        
+        static func from(identifier: String) -> LoginType? {
+            return LoginType(rawValue: identifier)
+        }
+    }
 }

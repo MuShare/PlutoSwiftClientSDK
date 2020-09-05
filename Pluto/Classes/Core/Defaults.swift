@@ -31,8 +31,7 @@ extension DefaultsKeys {
     var refreshToken: DefaultsKey<String?> { .init("org.mushare.pluto.refreshToken") }
     var expire: DefaultsKey<Int> { .init("org.mushare.pluto.exipre", defaultValue: 0) }
     var userId: DefaultsKey<Int?> { .init("org.mushare.pluto.userId") }
-    var name: DefaultsKey<String?> { .init("org.mushare.pluto.name") }
-    var avatar: DefaultsKey<String?> { .init("org.mushare.pluto.avatar") }
+    var infoJSONString: DefaultsKey<String?> { .init("org.mushare.pluto.info") }
 }
 
 class DefaultsManager {
@@ -76,23 +75,36 @@ class DefaultsManager {
             Defaults.userId = newValue
         }
     }
-
-    var user: PlutoUser? {
+    
+    var infoJSONString: String? {
         get {
-            guard
-                let userId = Defaults.userId,
-                let name = Defaults.name,
-                let avatar = Defaults.avatar
-            else {
-                return nil
-            }
-            return PlutoUser(id: userId, avatar: avatar, name: name)
+            Defaults.infoJSONString
         }
         set {
-            Defaults.userId = newValue?.id
-            Defaults.name = newValue?.name
-            Defaults.avatar = newValue?.avatar
+            Defaults.infoJSONString = newValue
         }
+    }
+
+    var user: PlutoUser? {
+        guard let jsonString = infoJSONString else {
+            return nil
+        }
+        let info = JSON(jsonString)
+        return PlutoUser(
+            id: info["sub"].intValue,
+            avatar: info["avatar"].stringValue,
+            name: info["name"].stringValue,
+            bindings: info["bindings"].arrayValue.compactMap {
+                guard let loginType = Pluto.LoginType.from(identifier: $0["login_type"].stringValue) else {
+                    return nil
+                }
+                return PlutoUser.Binding(
+                    loginType: loginType,
+                    mail: $0["mail"].string
+                )
+            }
+        )
+
     }
     
     func updateJwt(_ jwt: String) -> Bool {
@@ -119,7 +131,7 @@ class DefaultsManager {
         refreshToken = nil
         expire = 0
         userId = nil
-        user = nil
+        infoJSONString = nil
     }
     
 }

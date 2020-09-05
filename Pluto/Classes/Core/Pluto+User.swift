@@ -34,13 +34,12 @@ extension Pluto {
             AF.request(requestUrl, method: .get, headers: $0).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
-                    let result = response.getBody()
-                    let user = PlutoUser(
-                        id: result["sub"].intValue,
-                        avatar: result["avatar"].stringValue,
-                        name: result["name"].stringValue
-                    )
-                    DefaultsManager.shared.user = user
+                    DefaultsManager.shared.infoJSONString = response.getBody().description
+                    guard let user = DefaultsManager.shared.user else {
+                        error?(PlutoError.parseError)
+                        return
+                    }
+                    DefaultsManager.shared.userId = user.id
                     success(user)
                 } else {
                     error?(response.errorCode())
