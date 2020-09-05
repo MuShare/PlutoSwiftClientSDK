@@ -27,7 +27,7 @@ import Alamofire
 import SwiftyJSON
 
 struct PlutoResponse {
-
+    
     var data: [String: Any] = [:]
     
     init(_ response: AFDataResponse<Any>) {
@@ -80,6 +80,8 @@ public enum PlutoError: Int, Error {
     case mailAlreadyVerified = 2004
     case usernameNotExsit = 2005
     case userNameExist = 2006
+    case bindAlreadyExists = 2007
+    case bindNotExist = 2008
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
     case invalidJWTToekn = 3003
