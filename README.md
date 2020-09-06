@@ -49,6 +49,16 @@ Get scopes from jwt token with
 
 - `Pluto.shared.getScopes()`
 
+Bind and unbind accounts
+
+- `Pluto.shared.bind()`
+- `Pluto.shared.unbind()`
+
+Get avaliable login types and bindings
+
+- `Pluto.shared.avialiableLoginTypes`
+- `Pluto.shared.avialiableBindings`
+
 ## Author
 
 lm2343635, lm2343635@126.com
