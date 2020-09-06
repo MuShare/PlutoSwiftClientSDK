@@ -26,30 +26,6 @@
 import Alamofire
 import SwiftyJSON
 
-public struct PlutoUser {
-    public let id: Int
-    public let avatar: String
-    public let name: String
-    public let bindings: [Binding]
-    
-    public struct Binding {
-        public let loginType: Pluto.LoginType
-        public let mail: String?
-    }
-    
-    public var google: Binding? {
-        bindings.first { $0.loginType == .google }
-    }
-    
-    public var mail: Binding? {
-        bindings.first { $0.loginType == .mail }
-    }
-    
-    public var apple: Binding? {
-        bindings.first { $0.loginType == .apple }
-    }
-}
-
 final public class Pluto {
     
     public typealias ErrorCompletion = (PlutoError) -> Void
