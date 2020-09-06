@@ -82,6 +82,7 @@ public enum PlutoError: Int, Error {
     case userNameExist = 2006
     case bindAlreadyExists = 2007
     case bindNotExist = 2008
+    case passwordNotSet = 2009
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
     case invalidJWTToekn = 3003
