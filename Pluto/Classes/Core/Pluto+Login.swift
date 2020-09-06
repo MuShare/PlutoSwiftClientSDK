@@ -26,7 +26,7 @@
 import Alamofire
 
 extension Pluto {
-
+    
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/register"),
@@ -106,7 +106,7 @@ extension Pluto {
             self.handleLogin(response: PlutoResponse($0), success: success, error: error)
         }
     }
-
+    
     public func loginWithApple(authCode: String, name: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/login/apple/mobile"),
@@ -206,6 +206,14 @@ extension Pluto {
     }
     
     public func unbinding(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        guard let bindings = avialiableBindings else {
+            error?(PlutoError.notSignin)
+            return
+        }
+        guard bindings.count > 1 else {
+            error?(PlutoError.unbundNotAllow)
+            return
+        }
         let requestUrl = url(from: "/v1/user/unbinding")
         getHeaders {
             AF.request(
@@ -227,4 +235,14 @@ extension Pluto {
         }
     }
     
+    public var avialiableLoginTypes: [Pluto.LoginType] {
+        [.mail, .google, .apple]
+        // TODO: Wechat login should be removed if wechat is not installed.
+    }
+    
+    public var avialiableBindings: [PlutoUser.Binding]? {
+        DefaultsManager.shared.user?.bindings.filter {
+            avialiableLoginTypes.contains($0.loginType)
+        }
+    }
 }
