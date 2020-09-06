@@ -74,6 +74,7 @@ public enum PlutoError: Int, Error {
     case badRequest = -99998
     case parseError = -99997
     case avatarBase64GenerateError = 901
+    case appleSigninAuthorizationParseError = 902
     case notSignin = 1001
     case mailIsAlreadyRegister = 2001
     case mailIsNotExsit = 2002
