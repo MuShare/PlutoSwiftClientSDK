@@ -236,8 +236,13 @@ extension Pluto {
     }
     
     public var avialiableLoginTypes: [Pluto.LoginType] {
-        [.mail, .google, .apple]
+        var types = [Pluto.LoginType.mail, .google]
+        if #available(iOS 13.0, *) {
+            types.append(.apple)
+        }
         // TODO: Wechat login should be removed if wechat is not installed.
+        
+        return types
     }
     
     public var avialiableBindings: [PlutoUser.Binding]? {
