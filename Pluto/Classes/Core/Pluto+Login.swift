@@ -26,7 +26,7 @@
 import Alamofire
 
 extension Pluto {
-
+    
     public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/register"),
@@ -106,7 +106,7 @@ extension Pluto {
             self.handleLogin(response: PlutoResponse($0), success: success, error: error)
         }
     }
-
+    
     public func loginWithApple(authCode: String, name: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/login/apple/mobile"),

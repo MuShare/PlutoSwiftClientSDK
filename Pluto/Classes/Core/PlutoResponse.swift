@@ -27,7 +27,7 @@ import Alamofire
 import SwiftyJSON
 
 struct PlutoResponse {
-
+    
     var data: [String: Any] = [:]
     
     init(_ response: AFDataResponse<Any>) {
@@ -73,6 +73,8 @@ public enum PlutoError: Int, Error {
     case unknown = -99999
     case badRequest = -99998
     case parseError = -99997
+    case avatarBase64GenerateError = 901
+    case appleSigninAuthorizationParseError = 902
     case notSignin = 1001
     case mailIsAlreadyRegister = 2001
     case mailIsNotExsit = 2002
@@ -80,8 +82,19 @@ public enum PlutoError: Int, Error {
     case mailAlreadyVerified = 2004
     case usernameNotExsit = 2005
     case userNameExist = 2006
+    case bindAlreadyExists = 2007
+    case bindNotExist = 2008
+    case passwordNotSet = 2009
+    case unbundNotAllow = 2010
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
     case invalidJWTToekn = 3003
-    case avatarBase64GenerateError = 4001
+    case invalidGoogleIDToken = 3004
+    case invalidWechatCode = 3005
+    case invalidAvatarFormat = 3006
+    case invalidAppleIDToken = 3007
+    case jwtTokenExpired = 3008
+    case invalidAccessToken = 3009
+    case invalidApplication = 3010
+    case refreshTokenExpired = 3011
 }

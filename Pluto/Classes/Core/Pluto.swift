@@ -26,12 +26,6 @@
 import Alamofire
 import SwiftyJSON
 
-public struct PlutoUser {
-    public let id: Int
-    public let avatar: String
-    public let name: String
-}
-
 final public class Pluto {
     
     public typealias ErrorCompletion = (PlutoError) -> Void
@@ -69,7 +63,7 @@ final public class Pluto {
     let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     
     private init() {}
-   
+    
     func url(from relativeUrl: String) -> String {
         if server.last == "/" {
             return String(server.dropLast()) + relativeUrl
@@ -98,5 +92,21 @@ final public class Pluto {
     public func currentState() -> Pluto.State {
         return state
     }
+    
+}
 
+extension Pluto {
+    public enum LoginType: String {
+        case mail
+        case apple
+        case google
+        
+        var identifier: String {
+            rawValue
+        }
+        
+        static func from(identifier: String) -> LoginType? {
+            return LoginType(rawValue: identifier)
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
-//  Pluto+User.swift
+//  Pluto+Binding.swift
 //  Pluto
 //
-//  Created by Meng Li on 2019/01/01.
-//  Copyright © 2018 MuShare. All rights reserved.
+//  Created by Meng Li on 2020/09/06.
+//  Copyright © 2020 MuShare. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,49 @@
 // THE SOFTWARE.
 
 import Alamofire
-import SwiftyJSON
 
 extension Pluto {
     
-    public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "/v1/user/info")
-        getHeaders {
-            AF.request(requestUrl, method: .get, headers: $0).responseJSON {
-                let response = PlutoResponse($0)
-                if response.statusOK() {
-                    DefaultsManager.shared.infoJSONString = response.getBody().description
-                    guard let user = DefaultsManager.shared.user else {
-                        error?(PlutoError.parseError)
-                        return
-                    }
-                    DefaultsManager.shared.userId = user.id
-                    success(user)
-                } else {
-                    error?(response.errorCode())
-                }
-            }
+    public var avialiableLoginTypes: [Pluto.LoginType] {
+        var types = [Pluto.LoginType.mail, .google]
+        if #available(iOS 13.0, *) {
+            types.append(.apple)
+        }
+        // TODO: Wechat login should be removed if wechat is not installed.
+        
+        return types
+    }
+    
+    public var avialiableBindings: [PlutoUser.Binding]? {
+        DefaultsManager.shared.user?.bindings.filter {
+            avialiableLoginTypes.contains($0.loginType)
         }
     }
     
-    public func updateName(name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "/v1/user/info")
+    public func binding(type: LoginType, authString: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        var parameters = [
+            "type": type.identifier
+        ]
+        switch type {
+        case .mail:
+            parameters["mail"] = authString
+        case .apple:
+            parameters["code"] = authString
+        case .google:
+            parameters["id_token"] = authString
+        }
+        let requestUrl = url(from: "/v1/user/binding")
         getHeaders {
             AF.request(
                 requestUrl,
-                method: .put,
-                parameters: [
-                    "name": name
-                ],
+                method: .post,
+                parameters: parameters,
                 encoding: JSONEncoding.default,
                 headers: $0
             ).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
-                    success()
+                    success?()
                 } else {
                     error?(response.errorCode())
                 }
@@ -70,30 +74,34 @@ extension Pluto {
         }
     }
     
-    public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        guard let base64 = image.base64() else {
-            error?(PlutoError.avatarBase64GenerateError)
+    public func unbinding(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        guard let bindings = avialiableBindings else {
+            error?(PlutoError.notSignin)
             return
         }
-        let requestUrl = url(from: "/v1/user/info")
+        guard bindings.count > 1 else {
+            error?(PlutoError.unbundNotAllow)
+            return
+        }
+        let requestUrl = url(from: "/v1/user/unbinding")
         getHeaders {
             AF.request(
                 requestUrl,
-                method: .put,
+                method: .post,
                 parameters: [
-                    "avatar": base64
+                    "type": type.identifier
                 ],
                 encoding: JSONEncoding.default,
                 headers: $0
             ).responseJSON {
                 let response = PlutoResponse($0)
                 if response.statusOK() {
-                    success()
+                    success?()
                 } else {
                     error?(response.errorCode())
                 }
             }
         }
     }
-    
+
 }
