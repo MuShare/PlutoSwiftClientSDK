@@ -43,7 +43,7 @@ extension Pluto {
         }
     }
     
-    public func binding(type: LoginType, authString: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+    public func bind(type: LoginType, authString: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         var parameters = [
             "type": type.identifier
         ]
@@ -74,7 +74,7 @@ extension Pluto {
         }
     }
     
-    public func unbinding(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+    public func unbind(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
         guard let bindings = avialiableBindings else {
             error?(PlutoError.notSignin)
             return
