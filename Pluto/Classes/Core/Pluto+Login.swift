@@ -34,7 +34,8 @@ extension Pluto {
             parameters: [
                 "mail": address,
                 "password": password,
-                "name": name
+                "name": name,
+                "app_id": appId
             ],
             encoding: JSONEncoding.default,
             headers: commonHeaders
@@ -53,7 +54,8 @@ extension Pluto {
             url(from: "/v1/user/register/verify/mail"),
             method: .post,
             parameters: [
-                "mail": address
+                "mail": address,
+                "app_id": appId
             ],
             encoding: JSONEncoding.default,
             headers: commonHeaders
@@ -133,7 +135,8 @@ extension Pluto {
             url(from: "/v1/user/password/reset/mail"),
             method: .post,
             parameters: [
-                "mail": address
+                "mail": address,
+                "app_id": appId
             ],
             encoding: JSONEncoding.default,
             headers: commonHeaders
