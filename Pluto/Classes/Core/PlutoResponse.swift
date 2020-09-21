@@ -31,6 +31,7 @@ struct PlutoResponse {
     var data: [String: Any] = [:]
     
     init(_ response: AFDataResponse<Any>) {
+        Pluto.shared.didReceivedResponse?(response)
         if let value = response.value as? [String: Any] {
             data = value
             #if DEBUG
@@ -38,7 +39,6 @@ struct PlutoResponse {
             let requestBody = String(data: response.request?.httpBody ?? Data(), encoding: .utf8) ?? ""
             print("\(Date()) Response for \(url)\n requestBody: \(requestBody)\n response: \(value)")
             #endif
-            
         }
     }
     
