@@ -64,6 +64,8 @@ final public class Pluto {
     
     private init() {}
     
+    public var didReceivedResponse: ((AFDataResponse<Any>) -> Void)? = nil
+    
     func url(from relativeUrl: String) -> String {
         if server.last == "/" {
             return String(server.dropLast()) + relativeUrl
