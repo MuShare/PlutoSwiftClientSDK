@@ -41,4 +41,12 @@ extension Pluto {
         #endif
     }
     
+    public func resetExpire(to date: Date) {
+        #if DEBUG
+        DefaultsManager.shared.expire = Int(date.timeIntervalSince1970)
+        #else
+        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
+        #endif
+    }
+    
 }
