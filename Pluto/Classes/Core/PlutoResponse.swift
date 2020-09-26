@@ -30,6 +30,7 @@ struct PlutoResponse {
     
     let data: [String: Any]
     let body: JSON
+    let plutoError: PlutoError
     
     init(_ response: AFDataResponse<Any>) {
         Pluto.shared.didReceivedResponse?(response)
@@ -48,6 +49,11 @@ struct PlutoResponse {
         } else {
             body = JSON()
         }
+        if !data.isEmpty, let error = data["error"] as? [String: Any], let code = error["code"] as? Int {
+            plutoError = PlutoError(rawValue: code) ?? .badRequest
+        } else {
+            plutoError = .badRequest
+        }
     }
     
     func statusOK() -> Bool {
@@ -61,15 +67,8 @@ struct PlutoResponse {
         return body
     }
     
-    func errorCode() -> PlutoError {
-        guard
-            !data.isEmpty,
-            let error = data["error"] as? [String: Any],
-            let code = error["code"] as? Int
-        else {
-            return .badRequest
-        }
-        return PlutoError(rawValue: code) ?? .badRequest
+    func getError() -> PlutoError {
+        return plutoError
     }
     
 }
