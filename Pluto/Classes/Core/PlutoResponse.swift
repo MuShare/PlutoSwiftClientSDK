@@ -28,7 +28,8 @@ import SwiftyJSON
 
 struct PlutoResponse {
     
-    var data: [String: Any] = [:]
+    let data: [String: Any]
+    let body: JSON
     
     init(_ response: AFDataResponse<Any>) {
         Pluto.shared.didReceivedResponse?(response)
@@ -39,6 +40,13 @@ struct PlutoResponse {
             let requestBody = String(data: response.request?.httpBody ?? Data(), encoding: .utf8) ?? ""
             print("\(Date()) Response for \(url)\n requestBody: \(requestBody)\n response: \(value)")
             #endif
+        } else {
+            data = [:]
+        }
+        if let result = data["body"] as? [String: Any] {
+            body = JSON(result)
+        } else {
+            body = JSON()
         }
     }
     
@@ -50,10 +58,7 @@ struct PlutoResponse {
     }
     
     func getBody() -> JSON {
-        guard let result = data["body"] as? [String: Any] else {
-            return JSON()
-        }
-        return JSON(result)
+        return body
     }
     
     func errorCode() -> PlutoError {
