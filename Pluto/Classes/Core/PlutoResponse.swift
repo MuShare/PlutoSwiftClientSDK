@@ -54,6 +54,14 @@ struct PlutoResponse {
         } else {
             plutoError = .badRequest
         }
+        
+        // Handle global error.
+        switch plutoError {
+        case .invalidRefreshToken:
+            Pluto.shared.logout()
+        default:
+            break
+        }
     }
     
     func statusOK() -> Bool {
