@@ -32,13 +32,13 @@ extension Pluto {
         let expire = DefaultsManager.shared.expire
         guard
             !isForceRefresh,
-            let jwt = DefaultsManager.shared.jwt,
+            let accessToken = DefaultsManager.shared.accessToken,
             expire - Int(Date().timeIntervalSince1970) > 5 * 60
         else {
             refreshToken(completion: completion)
             return
         }
-        completion(jwt)
+        completion(accessToken)
     }
     
     func refreshToken(completion: @escaping (String?) -> Void) {
@@ -59,15 +59,15 @@ extension Pluto {
             if response.statusOK() {
                 let body = response.getBody()
                 guard
-                    let jwt = body["access_token"].string,
-                    DefaultsManager.shared.updateJwt(jwt),
+                    let accessToken = body["access_token"].string,
+                    DefaultsManager.shared.updateAccessToken(accessToken),
                     let refreshToken = body["refresh_token"].string
                 else {
                     completion(nil)
                     return
                 }
                 DefaultsManager.shared.refreshToken = refreshToken
-                completion(jwt)
+                completion(accessToken)
             }
         }
     }
