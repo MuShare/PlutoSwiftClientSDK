@@ -24,6 +24,8 @@ To auth with Pluto, set up it at first in your `AppDelegate` class.
 Pluto.shared.setup(server: "[server url]", appId: "[app id]")
 ```
 
+### Sign in, Sign up and Sign out
+
 Implement signing in and signing up with the following methods
 
 - `Pluto.shared.registerByEmaili()`
@@ -33,6 +35,8 @@ Implement signing in and signing up with the following methods
 - `Pluto.shared.loginWithApple()`
 - `Pluto.shared.resetPassword()`
 - `Pluto.shared.logout()`
+
+### Token Management
 
 After signing in, get token or the header with token with the following methods
 
@@ -49,6 +53,8 @@ Get scopes from jwt token with
 
 - `Pluto.shared.getScopes()`
 
+### Account Binding
+
 Bind and unbind accounts
 
 - `Pluto.shared.bind()`
@@ -58,6 +64,13 @@ Get avaliable login types and bindings
 
 - `Pluto.shared.avialiableLoginTypes`
 - `Pluto.shared.avialiableBindings`
+
+### Debug
+
+Support the following debug method for `DEBUG` and `ADHOC` mode:
+- `Pluto.shared.simulateInvalidRefreshToken`
+- `Pluto.shared.simulateInvalidAccessToken`
+- `Pluto.shared.resetExpire`
 
 ## Author
 
