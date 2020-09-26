@@ -33,4 +33,12 @@ extension Pluto {
         #endif
     }
     
+    public func simulateInvalidAccessToken() {
+        #if DEBUG
+        DefaultsManager.shared.accessToken = UUID().uuidString
+        #else
+        debugPrint("Cannot invoke simulateInvalidRefreshToken without DEBUG mode.")
+        #endif
+    }
+    
 }
