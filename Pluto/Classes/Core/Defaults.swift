@@ -40,7 +40,7 @@ class DefaultsManager {
     
     private init() {}
     
-    var jwt: String? {
+    var accessToken: String? {
         get {
             Defaults.jwt
         }
@@ -107,8 +107,8 @@ class DefaultsManager {
 
     }
     
-    func updateJwt(_ jwt: String) -> Bool {
-        let parts = jwt.split(separator: ".").map(String.init)
+    func updateAccessToken(_ accessToken: String) -> Bool {
+        let parts = accessToken.split(separator: ".").map(String.init)
         guard parts.count == 3, let restoreString = parts[1].base64Decoded else {
             return false
         }
@@ -122,12 +122,12 @@ class DefaultsManager {
         }
         self.userId = userId
         self.expire = expire
-        self.jwt = jwt
+        self.accessToken = accessToken
         return true
     }
     
     func clear() {
-        jwt = nil
+        accessToken = nil
         refreshToken = nil
         expire = 0
         userId = nil

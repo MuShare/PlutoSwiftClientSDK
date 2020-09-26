@@ -166,7 +166,7 @@ extension Pluto {
                 return
             }
             DefaultsManager.shared.refreshToken = refreshToken
-            guard DefaultsManager.shared.updateJwt(accessToken) else {
+            guard DefaultsManager.shared.updateAccessToken(accessToken) else {
                 error?(PlutoError.parseError)
                 return
             }
