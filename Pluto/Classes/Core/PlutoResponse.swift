@@ -28,7 +28,9 @@ import SwiftyJSON
 
 struct PlutoResponse {
     
-    var data: [String: Any] = [:]
+    let data: [String: Any]
+    let body: JSON
+    let plutoError: PlutoError
     
     init(_ response: AFDataResponse<Any>) {
         Pluto.shared.didReceivedResponse?(response)
@@ -39,6 +41,27 @@ struct PlutoResponse {
             let requestBody = String(data: response.request?.httpBody ?? Data(), encoding: .utf8) ?? ""
             print("\(Date()) Response for \(url)\n requestBody: \(requestBody)\n response: \(value)")
             #endif
+        } else {
+            data = [:]
+        }
+        if let result = data["body"] as? [String: Any] {
+            body = JSON(result)
+        } else {
+            body = JSON()
+        }
+        if !data.isEmpty, let error = data["error"] as? [String: Any], let code = error["code"] as? Int {
+            plutoError = PlutoError(rawValue: code) ?? .badRequest
+        } else {
+            plutoError = .badRequest
+        }
+        
+        // Handle global error.
+        switch plutoError {
+        case .invalidRefreshToken:
+            DefaultsManager.shared.clear()
+            Pluto.shared.state = .invalidRefreshToken
+        default:
+            break
         }
     }
     
@@ -50,21 +73,11 @@ struct PlutoResponse {
     }
     
     func getBody() -> JSON {
-        guard let result = data["body"] as? [String: Any] else {
-            return JSON()
-        }
-        return JSON(result)
+        return body
     }
     
-    func errorCode() -> PlutoError {
-        guard
-            !data.isEmpty,
-            let error = data["error"] as? [String: Any],
-            let code = error["code"] as? Int
-        else {
-            return .badRequest
-        }
-        return PlutoError(rawValue: code) ?? .badRequest
+    func getError() -> PlutoError {
+        return plutoError
     }
     
 }

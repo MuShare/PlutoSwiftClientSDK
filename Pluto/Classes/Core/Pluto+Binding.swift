@@ -68,7 +68,7 @@ extension Pluto {
                 if response.statusOK() {
                     success?()
                 } else {
-                    error?(response.errorCode())
+                    error?(response.getError())
                 }
             }
         }
@@ -98,7 +98,7 @@ extension Pluto {
                 if response.statusOK() {
                     success?()
                 } else {
-                    error?(response.errorCode())
+                    error?(response.getError())
                 }
             }
         }
