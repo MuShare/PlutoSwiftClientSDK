@@ -26,26 +26,26 @@
 extension Pluto {
     
     public func simulateInvalidRefreshToken() {
-        #if DEBUG
+        #if DEBUG || ADHOC
         DefaultsManager.shared.refreshToken = UUID().uuidString
         #else
-        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
+        debugPrint("\(#function) should be invoked in DEBUG or ADHOC mode.")
         #endif
     }
     
     public func simulateInvalidAccessToken() {
-        #if DEBUG
+        #if DEBUG || ADHOC
         DefaultsManager.shared.accessToken = UUID().uuidString
         #else
-        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
+        debugPrint("\(#function) should be invoked in DEBUG or ADHOC mode.")
         #endif
     }
     
     public func resetExpire(to date: Date) {
-        #if DEBUG
+        #if DEBUG || ADHOC
         DefaultsManager.shared.expire = Int(date.timeIntervalSince1970)
         #else
-        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
+        debugPrint("\(#function) should be invoked in DEBUG or ADHOC mode.")
         #endif
     }
     
