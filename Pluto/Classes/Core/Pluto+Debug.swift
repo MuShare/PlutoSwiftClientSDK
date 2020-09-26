@@ -29,7 +29,7 @@ extension Pluto {
         #if DEBUG
         DefaultsManager.shared.refreshToken = UUID().uuidString
         #else
-        debugPrint("Cannot invoke simulateInvalidRefreshToken without DEBUG mode.")
+        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
         #endif
     }
     
@@ -37,7 +37,7 @@ extension Pluto {
         #if DEBUG
         DefaultsManager.shared.accessToken = UUID().uuidString
         #else
-        debugPrint("Cannot invoke simulateInvalidRefreshToken without DEBUG mode.")
+        debugPrint("Cannot invoke \(#function) without DEBUG mode.")
         #endif
     }
     
