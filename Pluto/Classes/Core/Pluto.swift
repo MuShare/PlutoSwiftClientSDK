@@ -34,6 +34,7 @@ final public class Pluto {
         case notSignin
         case loading
         case signin
+        case invalidRefreshToken
     }
     
     public static let shared = Pluto()

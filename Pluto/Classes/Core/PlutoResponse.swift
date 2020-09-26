@@ -58,7 +58,8 @@ struct PlutoResponse {
         // Handle global error.
         switch plutoError {
         case .invalidRefreshToken:
-            Pluto.shared.logout()
+            DefaultsManager.shared.clear()
+            Pluto.shared.state = .invalidRefreshToken
         default:
             break
         }
