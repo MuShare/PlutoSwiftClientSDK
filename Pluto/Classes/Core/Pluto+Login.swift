@@ -130,6 +130,26 @@ extension Pluto {
         }
     }
     
+    public func loginWithWechat(code: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        AF.request(
+            url(from: "/v1/user/login/wechat/mobile"),
+            method: .post,
+            parameters: [
+                "code": code,
+                "device_id": deviceId,
+                "app_id": appId
+            ],
+            encoding: JSONEncoding.default,
+            headers: commonHeaders
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
+            }
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
+        }
+    }
+    
     public func resetPassword(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         AF.request(
             url(from: "/v1/user/password/reset/mail"),
