@@ -45,5 +45,9 @@ public struct PlutoUser {
     public var apple: Binding? {
         bindings.first { $0.loginType == .apple }
     }
+    
+    public var wechat: Binding? {
+        bindings.first { $0.loginType == .wechat }
+    }
 }
 

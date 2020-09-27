@@ -32,8 +32,9 @@ extension Pluto {
         if #available(iOS 13.0, *) {
             types.append(.apple)
         }
-        // TODO: Wechat login should be removed if wechat is not installed.
-        
+        if isWeChatInstalled {
+            types.append(.wechat)
+        }
         return types
     }
     
@@ -54,6 +55,8 @@ extension Pluto {
             parameters["code"] = authString
         case .google:
             parameters["id_token"] = authString
+        case .wechat:
+            parameters["code"] = authString
         }
         let requestUrl = url(from: "/v1/user/binding")
         getHeaders {
