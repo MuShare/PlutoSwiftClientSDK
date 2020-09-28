@@ -24,6 +24,11 @@
 // THE SOFTWARE.
 
 public struct PlutoUser {
+    private static let randomNamePrefix = [
+        "apple_user_",
+        "wechat_user_"
+    ]
+    
     public let id: Int
     public let avatar: String
     public let name: String
@@ -48,6 +53,12 @@ public struct PlutoUser {
     
     public var wechat: Binding? {
         bindings.first { $0.loginType == .wechat }
+    }
+    
+    public var isRandomName: Bool {
+        PlutoUser.randomNamePrefix
+            .map { name.starts(with: $0) }
+            .reduce(false) { $0 || $1 }
     }
 }
 
