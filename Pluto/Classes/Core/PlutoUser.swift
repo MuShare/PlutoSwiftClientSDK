@@ -56,7 +56,11 @@ public struct PlutoUser {
     }
     
     public var isRandomName: Bool {
-        PlutoUser.randomNamePrefix
+        PlutoUser.isRandomPlutoUsername(name)
+    }
+    
+    public static func isRandomPlutoUsername(_ name: String) -> Bool {
+        return PlutoUser.randomNamePrefix
             .map { name.starts(with: $0) }
             .reduce(false) { $0 || $1 }
     }
