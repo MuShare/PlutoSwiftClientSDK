@@ -41,6 +41,7 @@ final public class Pluto {
     
     var server: String = ""
     var appId: String = ""
+    var isWeChatInstalled = false
     
     var stateObserver: ((State) -> Void)?
     var state: State = .loading {
@@ -74,9 +75,10 @@ final public class Pluto {
         return server + relativeUrl
     }
     
-    public func setup(server: String, appId: String) {
+    public func setup(server: String, appId: String, isWeChatInstalled: Bool = false) {
         self.server = server
         self.appId = appId
+        self.isWeChatInstalled = isWeChatInstalled
         
         refreshToken { [unowned self] in
             guard $0 != nil else {
@@ -103,6 +105,7 @@ extension Pluto {
         case mail
         case apple
         case google
+        case wechat
         
         var identifier: String {
             rawValue

@@ -70,6 +70,7 @@ extension Pluto {
     }
     
     public func loginWithAccount(account: String, password: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        state = .loading
         AF.request(
             url(from: "/v1/user/login/account"),
             method: .post,
@@ -90,6 +91,7 @@ extension Pluto {
         }
     }
     public func loginWithGoogle(idToken: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        state = .loading
         AF.request(
             url(from: "/v1/user/login/google/mobile"),
             method: .post,
@@ -110,12 +112,34 @@ extension Pluto {
     }
     
     public func loginWithApple(authCode: String, name: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        state = .loading
         AF.request(
             url(from: "/v1/user/login/apple/mobile"),
             method: .post,
             parameters: [
                 "code": authCode,
                 "name": name,
+                "device_id": deviceId,
+                "app_id": appId
+            ],
+            encoding: JSONEncoding.default,
+            headers: commonHeaders
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                error?(PlutoError.unknown)
+                return
+            }
+            self.handleLogin(response: PlutoResponse($0), success: success, error: error)
+        }
+    }
+    
+    public func loginWithWechat(code: String, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
+        state = .loading
+        AF.request(
+            url(from: "/v1/user/login/wechat/mobile"),
+            method: .post,
+            parameters: [
+                "code": code,
                 "device_id": deviceId,
                 "app_id": appId
             ],
