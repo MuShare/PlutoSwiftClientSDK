@@ -28,20 +28,20 @@ import SwiftyJSON
 
 extension Pluto {
 
-    public func getToken(isForceRefresh: Bool = false, completion: @escaping (String?) -> Void) {
+    public func getAccessToken(isForceRefresh: Bool = false, completion: @escaping (String?) -> Void) {
         let expire = DefaultsManager.shared.expire
         guard
             !isForceRefresh,
             let accessToken = DefaultsManager.shared.accessToken,
             expire - Int(Date().timeIntervalSince1970) > 5 * 60
         else {
-            refreshToken(completion: completion)
+            refreshAccessToken(completion: completion)
             return
         }
         completion(accessToken)
     }
     
-    func refreshToken(completion: @escaping (String?) -> Void) {
+    func refreshAccessToken(completion: @escaping (String?) -> Void) {
         guard let refreshToken = DefaultsManager.shared.refreshToken else {
             completion(nil)
             return
@@ -73,7 +73,7 @@ extension Pluto {
     }
     
     public func getHeaders(completion: @escaping (HTTPHeaders?) -> Void) {
-        getToken {
+        getAccessToken {
             guard let jwt = $0 else {
                 completion(nil)
                 return
@@ -85,7 +85,7 @@ extension Pluto {
     }
     
     public func getScopes(completion: @escaping ([String]) -> Void) {
-        getToken {
+        getAccessToken {
             guard let jwt = $0 else {
                 completion([])
                 return

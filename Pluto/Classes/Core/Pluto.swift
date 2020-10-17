@@ -80,7 +80,7 @@ final public class Pluto {
         self.appId = appId
         self.isWeChatInstalled = isWeChatInstalled
         
-        refreshToken { [unowned self] in
+        getAccessToken { [unowned self] in
             guard $0 != nil else {
                 self.state = .notSignin
                 return
