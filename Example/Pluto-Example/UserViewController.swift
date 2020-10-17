@@ -35,7 +35,7 @@ class UserViewController: UIViewController {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        Pluto.shared.getToken(isForceRefresh: true) { [weak self] in
+        Pluto.shared.getAccessToken(isForceRefresh: true) { [weak self] in
             self?.showAlert(title: "token", content: $0 ?? "")
         }
     }

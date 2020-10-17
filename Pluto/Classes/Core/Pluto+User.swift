@@ -28,7 +28,11 @@ import SwiftyJSON
 
 extension Pluto {
     
-    public func myInfo(success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
+    public func myInfo(isForceRefresh: Bool = false, success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
+        if !isForceRefresh, let user = DefaultsManager.shared.user {
+            success(user)
+            return
+        }
         let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(requestUrl, method: .get, headers: $0).responseJSON {
@@ -42,7 +46,11 @@ extension Pluto {
                     DefaultsManager.shared.userId = user.id
                     success(user)
                 } else {
-                    error?(response.getError())
+                    if let user = DefaultsManager.shared.user {
+                        success(user)
+                    } else {
+                        error?(response.getError())
+                    }
                 }
             }
         }

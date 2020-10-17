@@ -31,7 +31,7 @@ extension Reactive where Base: Pluto {
     
     public var token: Single<String> {
         Single.create { [weak base] observer in
-            base?.getToken {
+            base?.getAccessToken {
                 guard let token = $0 else {
                     observer(.error(PlutoError.unknown))
                     return
