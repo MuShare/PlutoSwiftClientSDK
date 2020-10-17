@@ -28,7 +28,7 @@ import SwiftyJSON
 
 extension Pluto {
     
-    public func myInfo(isForceRefresh: Bool = true, success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
+    public func myInfo(isForceRefresh: Bool = false, success: @escaping (PlutoUser) -> Void, error: ErrorCompletion? = nil) {
         if !isForceRefresh, let user = DefaultsManager.shared.user {
             success(user)
             return
