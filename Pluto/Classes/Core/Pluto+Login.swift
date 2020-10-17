@@ -27,12 +27,20 @@ import Alamofire
 
 extension Pluto {
     
-    public func registerByEmail(address: String, password: String, name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+    public func register(
+        userId: String,
+        mail: String,
+        password: String,
+        name: String,
+        success: @escaping () -> Void,
+        error: ErrorCompletion? = nil
+    ) {
         AF.request(
             url(from: "/v1/user/register"),
             method: .post,
             parameters: [
-                "mail": address,
+                "user_id": userId,
+                "mail": mail,
                 "password": password,
                 "name": name,
                 "app_id": appId
