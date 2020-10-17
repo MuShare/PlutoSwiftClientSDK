@@ -56,6 +56,28 @@ extension Pluto {
         }
     }
     
+    public func updateUserId(userId: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        let requestUrl = url(from: "/v1/user/id")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .put,
+                parameters: [
+                    "userId": userId
+                ],
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    success()
+                } else {
+                    error?(response.getError())
+                }
+            }
+        }
+    }
+    
     public func updateName(name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         let requestUrl = url(from: "/v1/user/info")
         getHeaders {

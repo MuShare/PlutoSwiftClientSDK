@@ -30,6 +30,7 @@ public struct PlutoUser {
     ]
     
     public let id: Int
+    public let userId: String
     public let avatar: String
     public let name: String
     public let bindings: [Binding]

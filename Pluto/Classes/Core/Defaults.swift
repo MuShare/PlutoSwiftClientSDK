@@ -92,6 +92,7 @@ class DefaultsManager {
         let info = JSON(parseJSON: jsonString)
         return PlutoUser(
             id: info["sub"].intValue,
+            userId: info["userId"].stringValue,
             avatar: info["avatar"].stringValue,
             name: info["name"].stringValue,
             bindings: info["bindings"].arrayValue.compactMap {
