@@ -57,13 +57,13 @@ extension Pluto {
     }
     
     public func updateUserId(userId: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "/v1/user/id")
+        let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(
                 requestUrl,
                 method: .put,
                 parameters: [
-                    "userId": userId
+                    "user_id": userId
                 ],
                 encoding: JSONEncoding.default,
                 headers: $0
