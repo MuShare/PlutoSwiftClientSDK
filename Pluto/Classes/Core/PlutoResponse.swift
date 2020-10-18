@@ -93,13 +93,12 @@ public enum PlutoError: Int, Error {
     case mailIsNotExsit = 2002
     case mailIsNotVerified = 2003
     case mailAlreadyVerified = 2004
-    case usernameNotExsit = 2005
-    case userNameExist = 2006
+    case userIdNotExsit = 2005
+    case userIdExists = 2006
     case bindAlreadyExists = 2007
     case bindNotExist = 2008
     case passwordNotSet = 2009
     case unbundNotAllow = 2010
-    case userIdExists = 2011
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
     case invalidJWTToekn = 3003
