@@ -90,12 +90,12 @@ public enum PlutoError: Int, Error {
     case appleSigninAuthorizationParseError = 902
     case notSignin = 1001
     case mailIsAlreadyRegister = 2001
-    case mailIsNotExsit = 2002
+    case mailIsNotExist = 2002
     case mailIsNotVerified = 2003
     case mailAlreadyVerified = 2004
-    case usernameNotExsit = 2005
-    case userNameExist = 2006
-    case bindAlreadyExists = 2007
+    case userIdNotExist = 2005
+    case userIdExist = 2006
+    case bindAlreadyExist = 2007
     case bindNotExist = 2008
     case passwordNotSet = 2009
     case unbundNotAllow = 2010
