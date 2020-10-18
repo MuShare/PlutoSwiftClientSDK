@@ -57,47 +57,11 @@ extension Pluto {
     }
     
     public func updateUserId(userId: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "/v1/user/info")
-        getHeaders {
-            AF.request(
-                requestUrl,
-                method: .put,
-                parameters: [
-                    "user_id": userId
-                ],
-                encoding: JSONEncoding.default,
-                headers: $0
-            ).responseJSON {
-                let response = PlutoResponse($0)
-                if response.statusOK() {
-                    success()
-                } else {
-                    error?(response.getError())
-                }
-            }
-        }
+        updateInfo(parameters: ["user_id": userId], success: success, error: error)
     }
     
     public func updateName(name: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
-        let requestUrl = url(from: "/v1/user/info")
-        getHeaders {
-            AF.request(
-                requestUrl,
-                method: .put,
-                parameters: [
-                    "name": name
-                ],
-                encoding: JSONEncoding.default,
-                headers: $0
-            ).responseJSON {
-                let response = PlutoResponse($0)
-                if response.statusOK() {
-                    success()
-                } else {
-                    error?(response.getError())
-                }
-            }
-        }
+        updateInfo(parameters: ["name": name], success: success, error: error)
     }
     
     public func uploadAvatar(image: UIImage, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
@@ -105,14 +69,16 @@ extension Pluto {
             error?(PlutoError.avatarBase64GenerateError)
             return
         }
+        updateInfo(parameters: ["avatar": base64], success: success, error: error)
+    }
+    
+    private func updateInfo(parameters: Parameters, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
         let requestUrl = url(from: "/v1/user/info")
         getHeaders {
             AF.request(
                 requestUrl,
                 method: .put,
-                parameters: [
-                    "avatar": base64
-                ],
+                parameters: parameters,
                 encoding: JSONEncoding.default,
                 headers: $0
             ).responseJSON {

@@ -97,8 +97,8 @@ class UserViewController: UIViewController {
                 self?.nameLabel.text = name
             }, error: { [weak self] in
                 switch $0 {
-                case .userNameExist:
-                    self?.showAlert(title: "Error", content: "User name already exists")
+                case .userIdExist:
+                    self?.showAlert(title: "Error", content: "User ID already exists")
                 default:
                     print("Error updating user name: \($0)")
                 }
