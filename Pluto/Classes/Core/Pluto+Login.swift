@@ -57,14 +57,20 @@ extension Pluto {
         }
     }
     
-    public func resendValidationEmail(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+    public func resendValidationEmail(account: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        var parameters: Parameters = [
+            "app_id": appId
+        ]
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        if NSPredicate(format: "SELF MATCHES %@", emailRegEx).evaluate(with: self) {
+            parameters["mail"] = account
+        } else {
+            parameters["user_id"] = account
+        }
         AF.request(
             url(from: "/v1/user/register/verify/mail"),
             method: .post,
-            parameters: [
-                "mail": address,
-                "app_id": appId
-            ],
+            parameters: parameters,
             encoding: JSONEncoding.default,
             headers: commonHeaders
         ).responseJSON {
