@@ -57,14 +57,19 @@ extension Pluto {
         }
     }
     
-    public func resendValidationEmail(address: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+    public func resendValidationEmail(account: String, success: @escaping () -> Void, error: ErrorCompletion? = nil) {
+        var parameters: Parameters = [
+            "app_id": appId
+        ]
+        if account.contains("@") {
+            parameters["mail"] = account
+        } else {
+            parameters["user_id"] = account
+        }
         AF.request(
             url(from: "/v1/user/register/verify/mail"),
             method: .post,
-            parameters: [
-                "mail": address,
-                "app_id": appId
-            ],
+            parameters: parameters,
             encoding: JSONEncoding.default,
             headers: commonHeaders
         ).responseJSON {

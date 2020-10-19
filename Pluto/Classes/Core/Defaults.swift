@@ -30,7 +30,7 @@ extension DefaultsKeys {
     var jwt: DefaultsKey<String?> { .init("org.mushare.pluto.jwt") }
     var refreshToken: DefaultsKey<String?> { .init("org.mushare.pluto.refreshToken") }
     var expire: DefaultsKey<Int> { .init("org.mushare.pluto.exipre", defaultValue: 0) }
-    var userId: DefaultsKey<Int?> { .init("org.mushare.pluto.userId") }
+    var sub: DefaultsKey<Int?> { .init("org.mushare.pluto.userId") }
     var infoJSONString: DefaultsKey<String?> { .init("org.mushare.pluto.info") }
 }
 
@@ -67,12 +67,12 @@ class DefaultsManager {
         }
     }
     
-    var userId: Int? {
+    var sub: Int? {
         get {
-            Defaults.userId
+            Defaults.sub
         }
         set {
-            Defaults.userId = newValue
+            Defaults.sub = newValue
         }
     }
     
@@ -116,13 +116,10 @@ class DefaultsManager {
         }
         
         let user = JSON(parseJSON: restoreString)
-        guard
-            let userId = user["sub"].int,
-            let expire = user["exp"].int
-        else {
+        guard let sub = user["sub"].int, let expire = user["exp"].int else {
             return false
         }
-        self.userId = userId
+        self.sub = sub
         self.expire = expire
         self.accessToken = accessToken
         return true
@@ -132,7 +129,7 @@ class DefaultsManager {
         accessToken = nil
         refreshToken = nil
         expire = 0
-        userId = nil
+        sub = nil
         infoJSONString = nil
     }
     

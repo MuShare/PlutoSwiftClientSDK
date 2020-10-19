@@ -43,7 +43,7 @@ extension Pluto {
                         error?(PlutoError.parseError)
                         return
                     }
-                    DefaultsManager.shared.userId = user.id
+                    DefaultsManager.shared.sub = user.id
                     success(user)
                 } else {
                     if let user = DefaultsManager.shared.user {
