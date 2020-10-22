@@ -33,7 +33,7 @@ extension Pluto {
         guard
             !isForceRefresh,
             let accessToken = DefaultsManager.shared.accessToken,
-            expire - Int(Date().timeIntervalSince1970) > 5 * 60
+            expire - Int(Date().timeIntervalSince1970) > 30
         else {
             refreshAccessToken(completion: completion)
             return
@@ -42,10 +42,21 @@ extension Pluto {
     }
     
     func refreshAccessToken(completion: @escaping (String?) -> Void) {
-        guard let refreshToken = DefaultsManager.shared.refreshToken else {
-            completion(nil)
+        if isRefreshingAccessToken {
+            refreshAccessTokenCompletions.append(completion)
             return
         }
+        guard let refreshToken = DefaultsManager.shared.refreshToken else {
+            refreshAccessTokenCompletions.forEach {
+                $0(nil)
+            }
+            refreshAccessTokenCompletions.removeAll()
+            isRefreshingAccessToken = false
+            return
+        }
+        refreshAccessTokenCompletions.append(completion)
+        isRefreshingAccessToken = true
+        
         AF.request(
             url(from: "/v1/token/refresh"),
             method: .post,
@@ -54,7 +65,11 @@ extension Pluto {
                 "app_id": appId
             ],
             encoding: JSONEncoding.default
-        ).responseJSON {
+        ).responseJSON { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
             let response = PlutoResponse($0)
             if response.statusOK() {
                 let body = response.getBody()
@@ -63,12 +78,22 @@ extension Pluto {
                     DefaultsManager.shared.updateAccessToken(accessToken),
                     let refreshToken = body["refresh_token"].string
                 else {
-                    completion(nil)
+                    self.refreshAccessTokenCompletions.forEach {
+                        $0(nil)
+                    }
                     return
                 }
                 DefaultsManager.shared.refreshToken = refreshToken
-                completion(accessToken)
+                self.refreshAccessTokenCompletions.forEach {
+                    $0(accessToken)
+                }
+            } else {
+                self.refreshAccessTokenCompletions.forEach {
+                    $0(nil)
+                }
             }
+            self.refreshAccessTokenCompletions.removeAll()
+            self.isRefreshingAccessToken = false
         }
     }
     

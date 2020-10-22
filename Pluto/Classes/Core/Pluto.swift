@@ -64,6 +64,9 @@ final public class Pluto {
     
     let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     
+    var isRefreshingAccessToken = false
+    var refreshAccessTokenCompletions: [(String?) -> Void] = []
+    
     private init() {}
     
     public var didReceivedResponse: ((AFDataResponse<Any>) -> Void)? = nil

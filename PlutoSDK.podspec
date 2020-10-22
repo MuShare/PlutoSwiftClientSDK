@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlutoSDK'
-  s.version          = '0.8.1'
+  s.version          = '0.8.2'
   s.summary          = 'Swift SDK for Pluto login microservice.'
 
 # This description is used to generate tags and improve search results.
