@@ -29,6 +29,10 @@ import SwiftyJSON
 extension Pluto {
 
     public func getAccessToken(isForceRefresh: Bool = false, completion: @escaping (String?) -> Void) {
+        guard state == .signin else {
+            completion(nil)
+            return
+        }
         let expire = DefaultsManager.shared.expire
         guard
             !isForceRefresh,
@@ -46,6 +50,9 @@ extension Pluto {
             refreshAccessTokenCompletions.append(completion)
             return
         }
+        refreshAccessTokenCompletions.append(completion)
+        isRefreshingAccessToken = true
+        
         guard let refreshToken = DefaultsManager.shared.refreshToken else {
             refreshAccessTokenCompletions.forEach {
                 $0(nil)
@@ -54,8 +61,6 @@ extension Pluto {
             isRefreshingAccessToken = false
             return
         }
-        refreshAccessTokenCompletions.append(completion)
-        isRefreshingAccessToken = true
         
         AF.request(
             url(from: "/v1/token/refresh"),
