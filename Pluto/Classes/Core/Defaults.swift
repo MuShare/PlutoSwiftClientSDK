@@ -106,7 +106,10 @@ class DefaultsManager {
                 )
             }
         )
-
+    }
+    
+    var isTokenNil: Bool {
+        accessToken == nil || refreshToken == nil
     }
     
     func updateAccessToken(_ accessToken: String) -> Bool {
@@ -132,5 +135,5 @@ class DefaultsManager {
         sub = nil
         infoJSONString = nil
     }
-    
+
 }
