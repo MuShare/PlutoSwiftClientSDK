@@ -44,7 +44,7 @@ final public class Pluto {
     var isWeChatInstalled = false
     
     var stateObserver: ((State) -> Void)?
-    var state: State = .loading {
+    var state: State = DefaultsManager.shared.isTokenNil ? .notSignin : .signin {
         didSet {
             stateObserver?(state)
         }
@@ -82,14 +82,6 @@ final public class Pluto {
         self.server = server
         self.appId = appId
         self.isWeChatInstalled = isWeChatInstalled
-        
-        getAccessToken { [unowned self] in
-            guard $0 != nil else {
-                self.state = .notSignin
-                return
-            }
-            self.state = .signin
-        }
     }
     
     public func observeState(observer: ((State) -> Void)?) {
