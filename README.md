@@ -28,7 +28,7 @@ Pluto.shared.setup(server: "[server url]", appId: "[app id]")
 
 Implement signing in and signing up with the following methods
 
-- `Pluto.shared.registerByEmaili()`
+- `Pluto.shared.register()`
 - `Pluto.shared.resendValidationEmail()`
 - `Pluto.shared.loginWithAccount()`
 - `Pluto.shared.loginWithGoogle()`
@@ -45,6 +45,7 @@ After signing in, get token or the header with token with the following methods
 
 Get and update user information with 
 
+- `Pluto.shared.currentUser`
 - `Pluto.shared.myInfo()`
 - `Pluto.shared.updateName()`
 - `Pluto.shared.uploadAvatar()`
