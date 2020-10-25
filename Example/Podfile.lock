@@ -3,11 +3,11 @@ PODS:
   - Kingfisher (5.15.6):
     - Kingfisher/Core (= 5.15.6)
   - Kingfisher/Core (5.15.6)
-  - PlutoSDK/Core (0.8.4):
+  - PlutoSDK/Core (0.8.5):
     - Alamofire (~> 5)
     - SwiftyJSON (~> 5)
     - SwiftyUserDefaults (~> 5)
-  - PlutoSDK/Rx (0.8.4):
+  - PlutoSDK/Rx (0.8.5):
     - PlutoSDK/Core (~> 0)
     - RxCocoa (~> 5)
   - RxCocoa (5.1.1):
@@ -40,7 +40,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
   Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
-  PlutoSDK: 4d156962bbd58309a9eb2652bb7b3368caf4e082
+  PlutoSDK: 294baf549a38c403a94fc17ab34b20623971166c
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
