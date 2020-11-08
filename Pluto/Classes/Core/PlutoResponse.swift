@@ -100,10 +100,11 @@ public enum PlutoError: Int, Error {
     case bindAlreadyExist = 2007
     case bindNotExist = 2008
     case passwordNotSet = 2009
-    case unbundNotAllow = 2010
+    case unbindNotAllow = 2010
+    case sendMailFailure = 2011
     case invalidPassword = 3001
     case invalidRefreshToken = 3002
-    case invalidJWTToekn = 3003
+    case invalidJWTToken = 3003
     case invalidGoogleIDToken = 3004
     case invalidWechatCode = 3005
     case invalidAvatarFormat = 3006
