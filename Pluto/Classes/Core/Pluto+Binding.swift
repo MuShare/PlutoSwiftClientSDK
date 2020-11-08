@@ -83,7 +83,7 @@ extension Pluto {
             return
         }
         guard bindings.count > 1 else {
-            error?(PlutoError.unbundNotAllow)
+            error?(PlutoError.unbindNotAllow)
             return
         }
         let requestUrl = url(from: "/v1/user/unbinding")
