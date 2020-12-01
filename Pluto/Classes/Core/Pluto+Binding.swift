@@ -78,8 +78,8 @@ extension Pluto {
     }
     
     public func unbind(type: LoginType, success: (() -> Void)? = nil, error: ErrorCompletion? = nil) {
-        guard let bindings = avialiableBindings else {
-            error?(PlutoError.notSignin)
+        guard let bindings = availableBindings else {
+            error?(PlutoError.notSignIn)
             return
         }
         guard bindings.count > 1 else {
