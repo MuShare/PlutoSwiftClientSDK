@@ -63,8 +63,8 @@ Bind and unbind accounts
 
 Get avaliable login types and bindings
 
-- `Pluto.shared.avialiableLoginTypes`
-- `Pluto.shared.avialiableBindings`
+- `Pluto.shared.availiableLoginTypes`
+- `Pluto.shared.availiableBindings`
 
 ### Debug
 
