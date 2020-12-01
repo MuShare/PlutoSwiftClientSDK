@@ -27,7 +27,7 @@ import Alamofire
 
 extension Pluto {
     
-    public var avialiableLoginTypes: [Pluto.LoginType] {
+    public var availableLoginTypes: [Pluto.LoginType] {
         var types = [Pluto.LoginType.mail, .google]
         if #available(iOS 13.0, *) {
             types.append(.apple)
@@ -38,9 +38,9 @@ extension Pluto {
         return types
     }
     
-    public var avialiableBindings: [PlutoUser.Binding]? {
+    public var availableBindings: [PlutoUser.Binding]? {
         DefaultsManager.shared.user?.bindings.filter {
-            avialiableLoginTypes.contains($0.loginType)
+            availableLoginTypes.contains($0.loginType)
         }
     }
     
