@@ -31,9 +31,9 @@ final public class Pluto {
     public typealias ErrorCompletion = (PlutoError) -> Void
     
     public enum State {
-        case notSignin
+        case notSignIn
         case loading
-        case signin
+        case signIn
         case invalidRefreshToken
     }
     
@@ -44,7 +44,7 @@ final public class Pluto {
     var isWeChatInstalled = false
     
     var stateObserver: ((State) -> Void)?
-    var state: State = DefaultsManager.shared.isTokenNil ? .notSignin : .signin {
+    var state: State = DefaultsManager.shared.isTokenNil ? .notSignIn : .signIn {
         didSet {
             stateObserver?(state)
         }

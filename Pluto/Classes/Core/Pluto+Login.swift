@@ -189,7 +189,7 @@ extension Pluto {
     
     public func logout() {
         DefaultsManager.shared.clear()
-        state = .notSignin
+        state = .notSignIn
     }
     
     private func handleLogin(response: PlutoResponse, success: (() -> Void)?, error: ErrorCompletion?) {
@@ -207,7 +207,7 @@ extension Pluto {
                 error?(PlutoError.parseError)
                 return
             }
-            state = .signin
+            state = .signIn
             success?()
         } else {
             error?(response.getError())
