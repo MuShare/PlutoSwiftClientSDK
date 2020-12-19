@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Swift SDK for Pluto login microservice, which simplify the implementation for signing in with email, Google and Apple.
+Swift SDK for Pluto login microservice, which simplify the implementation for sign in with email, Google and Apple.
                        DESC
 
   s.homepage         = 'https://github.com/MuShare/Pluto-Swift-SDK'

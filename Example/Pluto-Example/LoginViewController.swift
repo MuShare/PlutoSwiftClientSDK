@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
         
         Pluto.shared.observeState { [unowned self] state in
             switch state {
-            case .signin:
+            case .signIn:
                 self.performSegue(withIdentifier: "userSegue", sender: self)
             default:
                 break

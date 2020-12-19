@@ -29,7 +29,7 @@ import SwiftyJSON
 extension Pluto {
     
     public var currentUser: PlutoUser? {
-        guard state == .signin, let user = DefaultsManager.shared.user else {
+        guard state == .signIn, let user = DefaultsManager.shared.user else {
             return nil
         }
         return user

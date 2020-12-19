@@ -29,7 +29,7 @@ import SwiftyJSON
 extension Pluto {
 
     public func getAccessToken(isForceRefresh: Bool = false, completion: @escaping (String?) -> Void) {
-        guard state == .signin else {
+        guard state == .signIn else {
             completion(nil)
             return
         }

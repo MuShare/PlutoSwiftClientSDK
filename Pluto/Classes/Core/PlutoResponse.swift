@@ -106,7 +106,7 @@ public enum PlutoError: Int, Error {
     case invalidRefreshToken = 3002
     case invalidJWTToken = 3003
     case invalidGoogleIDToken = 3004
-    case invalidWechatCode = 3005
+    case invalidWeChatCode = 3005
     case invalidAvatarFormat = 3006
     case invalidAppleIDToken = 3007
     case jwtTokenExpired = 3008
