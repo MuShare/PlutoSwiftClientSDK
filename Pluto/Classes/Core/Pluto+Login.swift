@@ -187,9 +187,10 @@ extension Pluto {
         }
     }
     
-    public func logout() {
+    public func logout(completion: (() -> Void)? = nil) {
         DefaultsManager.shared.clear()
         state = .notSignIn
+        completion?()
     }
     
     private func handleLogin(response: PlutoResponse, success: (() -> Void)?, error: ErrorCompletion?) {
