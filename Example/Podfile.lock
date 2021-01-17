@@ -6,7 +6,7 @@ PODS:
     - SwiftyJSON (~> 5)
     - SwiftyUserDefaults (~> 5)
   - PlutoSDK/Rx (1.0):
-    - PlutoSDK/Core (~> 0)
+    - PlutoSDK/Core (~> 1)
     - RxCocoa (~> 6)
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
-  PlutoSDK: 600234e510dde27b6480f3f9db1ff9e9fd57c1cf
+  PlutoSDK: 334853b1c01388986f44c914b0969ee524deca5d
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
