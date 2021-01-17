@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlutoSDK'
-  s.version          = '0.8.10'
+  s.version          = '1.0'
   s.summary          = 'Swift SDK for Pluto login microservice.'
 
 # This description is used to generate tags and improve search results.
@@ -41,7 +41,7 @@ Swift SDK for Pluto login microservice, which simplify the implementation for si
 
   s.subspec 'Rx' do |rx|
     rx.source_files = 'Pluto/Classes/Rx/**/*'
-    rx.dependency 'PlutoSDK/Core', '~> 0'
-    rx.dependency 'RxCocoa', '~> 5'
+    rx.dependency 'PlutoSDK/Core', '~> 1'
+    rx.dependency 'RxCocoa', '~> 6'
   end
 end
