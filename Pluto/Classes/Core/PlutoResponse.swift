@@ -59,7 +59,7 @@ struct PlutoResponse {
         switch plutoError {
         case .invalidRefreshToken,
              .refreshTokenExpired:
-            if Pluto.shared.state != .invalidRefreshToken {
+            if Pluto.shared.state != .invalidRefreshToken, DefaultsManager.shared.refreshToken != nil {
                 DefaultsManager.shared.clear()
                 Pluto.shared.state = .invalidRefreshToken
             }
