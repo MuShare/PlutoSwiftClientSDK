@@ -192,6 +192,29 @@ extension Pluto {
         state = .notSignIn
         completion?()
     }
+
+    public func deleteAccount(success: @escaping (() -> Void), error: ErrorCompletion? = nil) {
+        let requestUrl = url(from: "/v1/user/delete")
+        getHeaders {
+            AF.request(
+                requestUrl,
+                method: .post,
+                parameters: nil,
+                encoding: JSONEncoding.default,
+                headers: $0
+            ).responseJSON {
+                let response = PlutoResponse($0)
+                if response.statusOK() {
+                    DefaultsManager.shared.clear()
+                    self.state = .notSignIn
+
+                    success()
+                } else {
+                    error?(response.getError())
+                }
+            }
+        }
+    }
     
     private func handleLogin(response: PlutoResponse, success: (() -> Void)?, error: ErrorCompletion?) {
         if response.statusOK() {
