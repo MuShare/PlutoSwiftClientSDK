@@ -10,10 +10,10 @@ import PlutoSDK
 import Kingfisher
 
 class UserViewController: UIViewController {
-    
+
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -23,34 +23,34 @@ class UserViewController: UIViewController {
         ]
         return imagePickerController
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         Pluto.shared.myInfo(success: { [weak self] in
             self?.set(user: $0)
         }, error: {
             print("Error loading user info: \($0)")
         })
     }
-    
+
     @IBAction func refresh(_ sender: Any) {
         Pluto.shared.getAccessToken(isForceRefresh: true) { [weak self] in
             self?.showAlert(title: "token", content: $0 ?? "")
         }
     }
-    
+
     @IBAction func showScopes(_ sender: Any) {
         Pluto.shared.getScopes { [weak self] in
             self?.showAlert(title: "scopes", content: $0.description)
         }
     }
-    
+
     private func set(user: PlutoUser) {
         avatarImageView.kf.setImage(with: URL(string: user.avatar))
         nameLabel.text = user.name
     }
-    
+
     @IBAction func uploadAvatar(_ sender: Any) {
         let alertController = UIAlertController(
             title: "Update Avatar",
@@ -79,7 +79,7 @@ class UserViewController: UIViewController {
         alertController.popoverPresentationController?.sourceRect = avatarImageView.bounds
         present(alertController, animated: true)
     }
-    
+
     @IBAction func updateName(_ sender: Any) {
         let alertController = UIAlertController(
             title: "Update user name",
@@ -109,7 +109,14 @@ class UserViewController: UIViewController {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-    
+
+    @IBAction func deleteAccount(_ sender: Any) {
+        Pluto.shared.deleteAccount(success: { [unowned self] in
+            self.dismiss(animated: true)
+        }, error: { error in
+            print(error)
+        })
+    }
 }
 
 
